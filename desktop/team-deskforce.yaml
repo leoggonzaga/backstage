@@ -6,7 +6,7 @@ metadata:
 spec:
   type: team
   profile:
-    # Intentional no displayName for testing
+    displayName: Team Deskforce
     email: team-deskforce@desktop.net.br
     picture: https://api.dicebear.com/7.x/identicon/svg?seed=Fluffy&backgroundType=solid,gradientLinear&backgroundColor=ffd5dc,b6e3f4
   parent: backstage
@@ -18,7 +18,7 @@ metadata:
   name: leonardo.gonzaga
 spec:
   profile:
-    # Intentional no displayName for testing
+    displayName: Leonardo Gonzaga
     email: leonardo.gonzaga@desktop.net.br
     picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Luna&backgroundColor=transparent
   memberOf: [team-deskforce]
