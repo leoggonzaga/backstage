@@ -6,5 +6,5 @@ metadata:
   tags:
     - portal
 spec:
-  owner: OSS
+  owner: team-oss
   domain: resource
