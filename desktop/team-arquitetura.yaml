@@ -6,7 +6,7 @@ metadata:
 spec:
   type: team
   profile:
-    displayName: Team B
+    displayName: Team Arquitetura
     email: team-arquitetura@desktop.net.br
     picture: https://api.dicebear.com/7.x/identicon/svg?seed=Abby&backgroundType=solid,gradientLinear&backgroundColor=ffd5dc,b6e3f4
   parent: backstage
