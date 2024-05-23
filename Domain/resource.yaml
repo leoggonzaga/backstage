@@ -4,4 +4,4 @@ metadata:
   name: desktop-resource-field
   description: Gerencia a especificação, ciclo de vida, desenvolvimento, implantação e testes dos recursos disponíveis. Lida com operações como acesso, inventário e configuração dos recursos catalogados
 spec:
-  owner: team-customer
+  owner: desktop-corp
