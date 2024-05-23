@@ -9,7 +9,7 @@ spec:
     displayName: Team Arquitetura
     email: team-arquitetura@desktop.net.br
     picture: https://api.dicebear.com/7.x/identicon/svg?seed=Abby&backgroundType=solid,gradientLinear&backgroundColor=ffd5dc,b6e3f4
-  parent: backstage
+  parent: infrastructure
   children: []
 ---
 apiVersion: backstage.io/v1alpha1
