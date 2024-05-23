@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: desktop-resource-field-appointment
+metadata:
+  name: https://desktop.atlassian.net/appoinment/
+  description: Everything related to audio
+  links:
+    - url: https://desktop.atlassian.net/appoinment/
+      title: Domain Readme
+    - url: https://desktop.atlassian.net/appoinment/dashboard
+      title: Domain Metrics Dashboard
+      icon: dashboard
+spec:
+  owner: desk-fields
