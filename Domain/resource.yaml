@@ -1,0 +1,7 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: Resource
+  description: Gerencia a especificação, ciclo de vida, desenvolvimento, implantação e testes dos recursos disponíveis. Lida com operações como acesso, inventário e configuração dos recursos catalogados
+spec:
+  owner: team-customer
