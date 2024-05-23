@@ -54,7 +54,7 @@ spec:
     displayName: Jonathon Page
     email: jonathon-page@example.com
     picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Baby&backgroundColor=transparent
-  memberOf: [team-b]
+  memberOf: [team-arquitetura]
 ---
 apiVersion: backstage.io/v1alpha1
 kind: User
