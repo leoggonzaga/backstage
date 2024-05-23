@@ -2,11 +2,11 @@ apiVersion: backstage.io/v1alpha1
 kind: Domain
 metadata:
   name: desktop-resource
-  description: Everything related to audio
+  description: Desktop Resouce Dominio
   links:
-    - url: http://example.com/domain/audio/
+    - url: http://desktop.com.br/domain/desktop-resource/
       title: Domain Readme
-    - url: http://example.com/domains/audio/dashboard
+    - url: http://desktop.com.br/domains/desktop-resource/dashboard
       title: Domain Metrics Dashboard
       icon: dashboard
 spec:
