@@ -6,5 +6,6 @@ metadata:
 spec:
   targets:
     - ./Domain/customer.yaml
+    - ./Domain/resource.yaml
     - ./Domain/desktop-customer-payment.yaml
     - ./Domain/desktop-resource-field-appointment.yaml
