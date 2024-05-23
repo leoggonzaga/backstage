@@ -5,6 +5,6 @@ metadata:
   description: Todos os Domínios da Desktop
 spec:
   targets:
-    - customer.yaml
-    - desktop-customer-payment.yaml
-    - desktop-resource-field-appointment.yaml
+    - ./customer.yaml
+    - ./desktop-customer-payment.yaml
+    - ./desktop-resource-field-appointment.yaml
