@@ -1,0 +1,73 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: team-oss
+  description: Time OSS
+spec:
+  type: team
+  profile:
+    # Intentional no displayName for testing
+    email: team-oss@desktop.net.br
+    picture: https://api.dicebear.com/7.x/identicon/svg?seed=Fluffy&backgroundType=solid,gradientLinear&backgroundColor=ffd5dc,b6e3f4
+  parent: backstage
+  children: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: leo.gg
+spec:
+  profile:
+    # Intentional no displayName for testing
+    email: leonardo.gonzaga@desktop.net.br
+    picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Luna&backgroundColor=transparent
+  memberOf: [team-oss]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: vinioss.juliani 
+spec:
+  profile:
+    displayName: Viniciusoss Juliani
+    email: janelle-dawe@example.com
+    picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Leo&backgroundColor=transparent
+  memberOf: [team-oss]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: nigeloss.manning
+spec:
+  profile:
+    displayName: Nigeloss Manning
+    email: nigel-manning@example.com
+    picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Midnight&backgroundColor=transparent
+  memberOf: [team-oss]
+---
+# This user is added as an example, to make it more easy for the "Guest"
+# sign-in option to demonstrate some entities being owned. In a regular org,
+# a guest user would probably not be registered like this.
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: guest
+spec:
+  profile:
+    displayName: Guestss User
+    email: guestss@example.com
+  memberOf: [team-oss]
+---
+# This user is added as an example, to make it more easy for the "Guest"
+# sign-in option to demonstrate some entities being owned. In a regular org,
+# a guest user would probably not be registered like this.
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: guest
+  namespace: development
+spec:
+  profile:
+    displayName: Guestoss User
+    email: guestss@example.com
+  memberOf: [group:default/team-oss]

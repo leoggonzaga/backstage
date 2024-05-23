@@ -1,0 +1,30 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: desktop-corp
+  description: Desktop Internet
+  links:
+    - url: https://desktop.com.br/
+      title: Website
+    - url: https://meta.wikimedia.org/wiki/
+      title: Intranet
+spec:
+  type: organization
+  profile:
+    displayName: Desktop Internet
+    email: info@example.com
+    picture: https://api.dicebear.com/7.x/identicon/svg?seed=Maggie&flip=true&backgroundColor=ffdfbf
+  children: [infrastructure]
+---
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: todos-os-groups
+  description: A collection of all  Groups
+spec:
+  targets:
+    - ./infrastructure-group.yaml
+    - ./oss-group.yaml    
+    - ./team-deskforce.yaml
+    - ./team-arquitetura.yaml
+    - ./team-oss.yaml
