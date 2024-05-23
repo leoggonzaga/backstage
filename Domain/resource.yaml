@@ -2,13 +2,12 @@ apiVersion: backstage.io/v1alpha1
 kind: Domain
 metadata:
   name: desktop-resource-field
-  title: desktop-resource-field
-  description: Gerencia a especificação, ciclo de vida, desenvolvimento, implantação e testes dos recursos disponíveis. Lida com operações como acesso, inventário e configuração dos recursos catalogados
+  description: Everything related to audio
   links:
-    - url: http://example.com/domain/artists/
+    - url: http://example.com/domain/audio/
       title: Domain Readme
-    - url: http://example.com/domains/artists/dashboard
-      title: Domain desktop-resource-field Dashboard
+    - url: http://example.com/domains/audio/dashboard
+      title: Domain Metrics Dashboard
       icon: dashboard
 spec:
   owner: desktop-corp
