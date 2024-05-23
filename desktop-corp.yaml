@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: desktop-corp
+  description: A collection of all Groups
+spec:
+  targets:
+    - ./desktop/org.yaml
