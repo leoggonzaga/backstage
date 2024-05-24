@@ -9,4 +9,4 @@ metadata:
       icon: dashboard
 spec:
   owner: desktop-corp
-  subdomainOf: desktop-resource
+  subdomainOf: Domain:desktop-resource
