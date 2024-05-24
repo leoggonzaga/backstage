@@ -5,4 +5,4 @@ metadata:
   description: Todos os Domínios da Desktop
 spec:
   targets:
-    - ./domains/resource-domain.yam
+    - ./domains/resource-domain.yaml
