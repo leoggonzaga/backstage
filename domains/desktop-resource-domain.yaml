@@ -7,5 +7,3 @@ metadata:
     - url: http://desktop.com.br/domain/desktop-resource/
       title: Domain Readme
       icon: dashboard
-spec:
-  owner: desktop-corp
