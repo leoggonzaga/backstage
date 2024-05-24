@@ -4,5 +4,6 @@ metadata:
   name: desktop-systems
   description: A collection of all systems
 spec:
-  targets:
+  targets:    
+    - ./systems/desktop-resource-field-appoiment.yaml
     - ./systems/desktop-resource-field-system.yaml
