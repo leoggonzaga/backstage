@@ -8,5 +8,5 @@ metadata:
       title: Domain Readme
       icon: dashboard
 spec:
-  owner: desktop-corp
+  owner: user:default/leonardo.gonzaga
   subdomainOf: domain:default/resource
