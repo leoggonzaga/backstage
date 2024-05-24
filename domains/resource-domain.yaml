@@ -11,6 +11,4 @@ metadata:
       icon: dashboard
 spec:
   owner: desktop-corp
-  rules:
-    - allow: [Domain]
   
