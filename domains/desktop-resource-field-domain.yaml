@@ -5,4 +5,4 @@ metadata:
   description: Desktop Resouce Dominio..._  
 spec:
   owner: user:default/leonardo.gonzaga
-  partOf: domain:default/resource
+  hasPart: domain:default/resource
