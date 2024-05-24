@@ -6,4 +6,3 @@ metadata:
 spec:
   targets:    
     - ./systems/desktop-resource-field-appoiment.yaml
-    - ./systems/desktop-resource-field-system.yaml
