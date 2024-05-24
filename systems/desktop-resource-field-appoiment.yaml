@@ -1,11 +1,11 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: resource-field
+  name: appointment
   description: Sistema de Controle de Recursos do Field
   tags:
     - portal
 spec:
-  domain: resourcedm
+  domain: resource-field
   owner: desktop-corp
-  system: resource-field
+  
