@@ -1,13 +1,11 @@
 apiVersion: backstage.io/v1alpha1
 kind: Domain
 metadata:
-  name: "resourcedm"
+  name: resourcedm
   description: Desktop Resouce Dominio
   links:
     - url: http://desktop.com.br/domain/desktop-resource/
       title: Domain Readme
-    - url: http://desktop.com.br/domains/desktop-resource/dashboard
-      title: Domain Metrics Dashboard
       icon: dashboard
 spec:
   owner: desktop-corp
