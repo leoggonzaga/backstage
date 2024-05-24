@@ -5,4 +5,4 @@ metadata:
   description: Desktop Resouce Dominio....  
 spec:
   owner: user:default/leonardo.gonzaga
-  subdomainOf: resource
+  subdomainOf: domain:default/resource
