@@ -9,4 +9,4 @@ metadata:
       icon: dashboard
 spec:
   owner: user:default/leonardo.gonzaga
-  subdomainOf: domain:default/resource
+  subdomainOf: resource
