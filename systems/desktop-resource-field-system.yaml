@@ -6,5 +6,6 @@ metadata:
   tags:
     - portal
 spec:
-  owner: team-oss
   domain: resourcedm
+  owner: team-oss
+  
