@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: supply
-  description: Sistema de Controle de Recursos do Field
+  description: Gestão da cadeia de suprimentos, compras, logística, transporte.
   tags:
     - portal
 spec:

@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: problem
-  description: Sistema de Controle de Recursos do Field
+  description: Suporte e assistência (atendimento, resolução de problemas) prestados aos clientes durante toda a jornada
   tags:
     - portal
 spec:

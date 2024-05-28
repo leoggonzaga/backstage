@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: catalog
-  description: Sistema de Controle de Recursos do Field
+  description: Especificação, Ciclo de vida, Desenvolvimento, Políticas e Testes de produtos e ofertas. Precificação, Compatibilidade, Elegibilidade, Comercialização, Fidelidade de produtos e ofertas
   tags:
     - portal
 spec:

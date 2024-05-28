@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: collection
-  description: Sistema de Controle de Recursos do Field
+  description: Ações de Cobrança dos débitos dos parceiros de negócio
   tags:
     - portal
 spec:

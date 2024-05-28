@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: compliance
-  description: Sistema de Controle de Recursos do Field
+  description: Gestão das atividades regulatórias, jurídicas e de compliance
   tags:
     - portal
 spec:

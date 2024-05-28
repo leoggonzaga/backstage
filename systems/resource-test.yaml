@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: test
-  description: Sistema de Controle de Recursos do Field
+  description: Conduz os testes dos recursos
   tags:
     - portal
 spec:

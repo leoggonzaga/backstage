@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: channel
-  description: Sistema de Controle de Recursos do Field
+  description: Gerenciamento e operação de canais Internos e Externos
   tags:
     - portal
 spec:

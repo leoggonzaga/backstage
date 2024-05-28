@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: payment
-  description: Sistema de Controle de Recursos do Field
+  description: Controle e acompanhamento dos pagamentos de/para Parceiros
   tags:
     - portal
 spec:

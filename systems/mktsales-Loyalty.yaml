@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: Loyalty
-  description: Sistema de Controle de Recursos do Field
+  description: Define todos os aspectos de um programa de fidelidade, como requisitos, o nome e os objetivos do programa de fidelidade. Aspectos operacionais da execução de um programa de fidelidade
   tags:
     - portal
 spec:

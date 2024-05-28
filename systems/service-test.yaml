@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: test
-  description: Sistema de Controle de Recursos do Field
+  description: Conduz os testes dos serviços. Gera relatórios sobre os resultados dos testes realizados nos serviçosConduz os testes dos serviços. Gera relatórios sobre os resultados dos testes realizados nos serviços
   tags:
     - portal
 spec:

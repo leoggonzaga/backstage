@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: usage
-  description: Sistema de Controle de Recursos do Field
+  description: Gerencia e controla o uso dos serviços pelos clientes
   tags:
     - portal
 specs:

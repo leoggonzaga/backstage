@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: order
-  description: Sistema de Controle de Recursos do Field
+  description: Trata do processo de gerenciamento e execução de pedidos feitos pelos clientes em relação a produtos ou serviços
   tags:
     - portal
 spec:

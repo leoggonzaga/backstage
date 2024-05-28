@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: relationship
-  description: Sistema de Controle de Recursos do Field
+  description: Gerencia o ciclo de vida do cliente 
   tags:
     - portal
 spec:

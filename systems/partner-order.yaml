@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: order
-  description: Sistema de Controle de Recursos do Field
+  description: Gerencia e processa pedidos feitos pelos parceiros
   tags:
     - portal
 spec:

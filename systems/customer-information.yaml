@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: information
-  description: Sistema de Controle de Recursos do Field
+  description: Dados Clientes, inventário, contratos, parque, ativos, etc.
   tags:
     - portal
 spec:

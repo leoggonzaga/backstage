@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: interaction
-  description: Sistema de Controle de Recursos do Field
+  description: Atividades e processos relacionados à recepção e gestão de solicitações, consultas ou interações iniciadas pelos clientes nos canais disponíveis (URA, Email, App, Site...). Também remete à comunicações iniciadas pela organização, incluindo templates
   tags:
     - portal
 spec:

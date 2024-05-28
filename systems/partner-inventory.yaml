@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: inventory
-  description: Sistema de Controle de Recursos do Field
+  description: Lida com operações como acesso, inventário e configuração dos catálogos de parceiros
   tags:
     - portal
 spec:

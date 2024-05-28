@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: workforce
-  description: Sistema de Controle de Recursos do Field
+  description: Setup de Áreas, Sites, Time de Campo (Staff), Habilidades, Areas de Atuação, etc.
   tags:
     - portal
 spec:

@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: appointment
-  description: Sistema de Controle de Recursos do Field
+  description: Relacionado ao ERP empresarial, contas a receber, contas a pagar, etc.
   tags:
     - portal
 spec:

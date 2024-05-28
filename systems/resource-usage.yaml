@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: usage
-  description: Sistema de Controle de Recursos do Field
+  description: Processa eventos de mediação relacionados aos recursos
   tags:
     - portal
 spec:
