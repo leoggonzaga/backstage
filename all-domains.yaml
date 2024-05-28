@@ -7,3 +7,10 @@ spec:
   targets:    
     - ./domains/desktop-resource-domain.yaml
     - ./domains/desktop-resource-field-domain.yaml
+    - ./domains/mktsales-domain.yaml
+    - ./domains/product-domain.yaml
+    - ./domains/service-domain.yaml
+    - ./domains/resource-domain.yaml
+    - ./domains/partner-domain.yaml
+    - ./domains/customer-domain.yaml
+    - ./domains/enterprise-domain.yaml
