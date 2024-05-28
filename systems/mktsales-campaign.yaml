@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: campaign
+  description: Sistema de Controle de Recursos do Field
+  tags:
+    - portal
+spec:
+  domain: mktsalesv
+  owner: desktop-corp
+  

@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: mktsales
+  description: Desktop Mktsales Dominio.
+  links:
+    - url: http://desktop.com.br/domain/desktop-resource/
+      title: Domain Readme
+      icon: dashboard
+spec:
+  owner: desktop-corp

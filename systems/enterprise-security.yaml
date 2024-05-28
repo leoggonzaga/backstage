@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: security
+  description: Sistema de Controle de Recursos do Field
+  tags:
+    - portal
+spec:
+  domain: enterprise
+  owner: desktop-corp
+  
