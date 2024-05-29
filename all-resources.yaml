@@ -6,3 +6,4 @@ metadata:
 spec:
   targets:
     - ./recursos/admin-db-rsc.yaml
+    - ./recursos/kafka-mq.yaml
