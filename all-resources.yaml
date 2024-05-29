@@ -5,4 +5,4 @@ metadata:
   description: A collection of all Backstage example resources
 spec:
   targets:
-    - ./recursos/recursos/admin-db-rsc.yaml
+    - ./recursos/admin-db-rsc.yaml
