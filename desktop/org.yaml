@@ -28,3 +28,4 @@ spec:
     - ./team-deskforce.yaml
     - ./team-arquitetura.yaml
     - ./team-oss.yaml
+    - ./team-operacoes.yaml
