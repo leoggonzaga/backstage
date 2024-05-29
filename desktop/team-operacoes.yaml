@@ -1,0 +1,35 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: team-operacoes
+  description: Time de Operações
+spec:
+  type: team
+  profile:
+    # Intentional no displayName for testing
+    email: team-oss@desktop.net.br
+    picture: https://api.dicebear.com/7.x/identicon/svg?seed=Fluffy&backgroundType=solid,gradientLinear&backgroundColor=ffd5dc,b6e3f4
+  parent: backstage
+  children: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: paulo.menoni
+spec:
+  profile:
+    # Intentional no displayName for testing
+    email: paulo.menoni@desktop.net.br
+    picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Luna&backgroundColor=transparent
+  memberOf: [team-oss]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: ivan.grigio 
+spec:
+  profile:
+    displayName: Ivan Grigio
+    email: janelle-dawe@example.com
+    picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Leo&backgroundColor=transparent
+  memberOf: [team-oss]
