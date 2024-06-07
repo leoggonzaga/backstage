@@ -11,6 +11,7 @@ spec:
   lifecycle: experimental
   owner: team-deskforce
   system: customer-interaction
+  dependsOn: ['resource:admin-db', 'resource:kafka-mq']
   definition:
     $text: ./barramento-service-api-swagger.yaml
 
