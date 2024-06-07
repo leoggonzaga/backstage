@@ -1,8 +1,0 @@
-apiVersion: backstage.io/v1alpha1
-kind: Domain
-metadata:
-  name: resource-field
-  description: Desktop Resouce Dominio..._  
-spec:
-  owner: user:default/leonardo.gonzaga
-  hasPart: domain:default/resource

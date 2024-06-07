@@ -11,4 +11,5 @@ spec:
     - ./domains/resource-domain.yaml
     - ./domains/partner-domain.yaml
     - ./domains/customer-domain.yaml
+    - ./domains/legado-domain.yaml
     - ./domains/enterprise-domain.yaml
