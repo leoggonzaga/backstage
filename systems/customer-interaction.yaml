@@ -4,7 +4,7 @@ metadata:
   name: interaction
   description: Atividades e processos relacionados à recepção e gestão de solicitações, consultas ou interações iniciadas pelos clientes nos canais disponíveis (URA, Email, App, Site...). Também remete à comunicações iniciadas pela organização, incluindo templates
   tags:
-    - portal
+    - domain-customer
 spec:
   domain: customer
   owner: desktop-corp
