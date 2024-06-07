@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: mktsalesv-campaign
+  name: mktsales-campaign
   description: Definição, regras e execução de soluções relacionadas a campanhas de marketing. Emissão de relatórios operacionais referentes a campanhas de marketing
   tags:
-    - mktsalesv
+    - mktsales
 spec:
   domain: mktsalesv
   owner: desktop-corp
