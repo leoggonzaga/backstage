@@ -1,0 +1,932 @@
+openapi: 3.0.1
+info:
+  title: Desktop Gateway API
+  description: Documentação integração Field
+  license:
+    name: © 2021 DESKTOP INTERNET SERVICES | CNPJ 08.170.849/0001-15
+    url: http://www.desktop.com.br
+  version: v1.0.0.13
+
+servers:
+  - url: https://api-sandbox.desktop.com.br/ 
+    description: Sandbox endpoint
+  - url: https://api-v2.desktop.com.br/
+    description: Production endpoint
+    
+paths:
+  /field/v1/provision/salesforce/provision_new_costumer:
+    post:
+      tags: ["provision"]
+      summary: "Serviço para aprovisionar um novo cliente."
+      description: "Serviço responsavel por provisionar um novo cliente."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProvisionHttpRequest'
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+        400:
+          description: Erro parâmetros de entrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Erro parâmetros de entrada:
+                  value:
+                    message: "Erro parâmetros de entrada"
+                Origem desconhecida:
+                  value:
+                    message: "Erro ao identificar origem da chamada."
+        500:
+          description: Algo ocorreu errado. Entre em contato com o administrador.
+          
+  /field/v1/provision/salesforce/update_plan_speed:
+    post:
+      tags: ["provision"]
+      summary: "Serviço para atualizar velocidade do plano."
+      description: "Altera a velocidade do plano do usuário se o plano contratado for da mesma categoria do plano anterior."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePlanSpeedRequest'
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+        400:
+          description: Erro parâmetros de entrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Erro parâmetros de entrada:
+                  value:
+                    message: "Erro parâmetros de entrada"
+                Origem desconhecida:
+                  value:
+                    message: "Erro ao identificar origem da chamada."
+        500:
+          description: Algo ocorreu errado. Entre em contato com o administrador.
+          
+  /field/v1/provision/salesforce/provisioning_certificate:
+    post:
+      tags: ["provision"]
+      summary: "Serviço de certificado de aprovisionamento."
+      description: "Serviço responsavel por realizar a certificação dos dados do cliente com base nos parâmetros base recebidos."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CertificateRequest'
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+        400:
+          description: Erro parâmetros de entrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Erro parâmetros de entrada:
+                  value:
+                    message: "Erro parâmetros de entrada"
+                Origem desconhecida:
+                  value:
+                    message: "Erro ao identificar origem da chamada."
+        500:
+          description: Algo ocorreu errado. Entre em contato com o administrador.
+          
+  /field/v1/provision/salesforce/protocol_completion:
+    post:
+      tags: ["protocol"]
+      summary: "Serviço para encerramento de protocolo."
+      description: "Este endpoint permite finalizar um protocolo que está em aberto com os parâmetros especificados."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProtocolRequest'
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+        400:
+          description: Erro parâmetros de entrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Erro parâmetros de entrada:
+                  value:
+                    message: "Erro inesperado na requisicao. Por favor, revise os parametros de entrada."
+                    
+  /field/v1/provision/salesforce/recreate_plan_full:
+    post:
+      tags: ["provision"]
+      summary: "Serviço para recriar plano e outros serviços."
+      description: "Esta funcionalidade recria o plano do usuário para qualquer plano de categoria, realiza a manutenção de todos os tipos, mudança de endereço para todos os tipos."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecreatePlanRequestFull'
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+        400:
+          description: Erro parâmetros de entrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Erro parâmetros de entrada:
+                  value:
+                    message: "Erro parâmetros de entrada"
+                Origem desconhecida:
+                  value:
+                    message: "Erro ao identificar origem da chamada."
+        500:
+          description: Algo ocorreu errado. Entre em contato com o administrador.
+          
+  /field/v1/provision/salesforce/address-change:
+    post:
+      tags: ["provision"]
+      summary: "Serviço para Os 'Mudança de endereço'."
+      description: "Esta funcionalidade recria plano com mudança de endereço."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InputRecreatePlanAddressChange'
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+        400:
+          description: Erro parâmetros de entrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Erro parâmetros de entrada:
+                  value:
+                    message: "Erro parâmetros de entrada"
+                Origem desconhecida:
+                  value:
+                    message: "Erro ao identificar origem da chamada."
+        500:
+          description: Algo ocorreu errado. Entre em contato com o administrador.
+          
+  /field/v1/provision/salesforce/provision_new_plan:
+    post:
+      tags: ["provision"]
+      summary: "Serviço para Os 'Reativacao de plano'."
+      description: "Esta funcionalidade provisiona um novo plano."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InputProvisionNewPlan'
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+        400:
+          description: Erro parâmetros de entrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Erro parâmetros de entrada:
+                  value:
+                    message: "Erro parâmetros de entrada"
+                Origem desconhecida:
+                  value:
+                    message: "Erro ao identificar origem da chamada."
+        500:
+          description: Algo ocorreu errado. Entre em contato com o administrador.
+          
+  /field/v1/salesforce/product_list:
+    get:
+      tags: ["easyware - salesforce"]
+      summary: "Funcionalidade para listar materiais por tecnico. - Topic: dev.get.equipment"
+      description: ""
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+                
+  /field/v1/salesforce/technician_locations:
+    get:
+      tags: ["easyware - salesforce"]
+      summary: "Funcionalidade para listar localização por tecnico. - Topic: dev.get.technician.locations"
+      description: ""
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+                
+  /field/v1/salesforce/item_product_miscellany:
+    post:
+      tags: ["easyware - salesforce"]
+      summary: "Funcionalidade para inserir um item produto (miscelania). - Topic: dev.upsert.miscellany"
+      description: ""
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+                
+    patch:
+      tags: ["easyware - salesforce"]
+      summary: "Funcionalidade para atualizar um item produto (miscelania). - Topic: dev.upsert.miscellany"
+      description: ""
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+                
+  /field/v1/salesforce/miscellany:
+    patch:
+      tags: ["easyware - salesforce"]
+      summary: "Funcionalidade para atualizar miscelania. - Topic: dev.upsert.miscellany"
+      description: ""
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+                
+  /field/v1/salesforce/item_product_equipment:
+    post:
+      tags: ["easyware - salesforce"]
+      summary: "Funcionalidade para inserir um item produto (equipamento). - Topic: dev.upsert.equipment"
+      description: ""
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+                
+    patch:
+      tags: ["easyware - salesforce"]
+      summary: "Funcionalidade para atualizar um item produto (equipamento). - Topic: dev.upsert.equipment"
+      description: ""
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+                
+  /field/v1/salesforce/equipment:
+    patch:
+      tags: ["easyware - salesforce"]
+      summary: "Funcionalidade para atualizar equipamento. - Topic: dev.upsert.equipment"
+      description: ""
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+                
+  /field/v1/salesforce/serialized_product:
+    post:
+      tags: ["easyware - salesforce"]
+      summary: "Funcionalidade para inserir um produto serializado. - Topic: dev.upsert.serialized.product"
+      description: ""
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+                
+    delete:
+      tags: ["easyware - salesforce"]
+      summary: "Funcionalidade para deletar um produto serializado. - Topic: dev.delete.serialized.product"
+      description: ""
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+                
+  /field/v1/salesforce/locations:
+    patch:
+      tags: ["easyware - salesforce"]
+      summary: "Funcionalidade para atualizar localizacao do tecnico/equipamento. - Topic: dev.upsert.locations"
+      description: ""
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+                
+  /field/v1/salesforce/technical_suitcase_approval:
+    post:
+      tags: ["easyware - salesforce"]
+      summary: "Funcionalidade para gerar uma transferencia de equipamentos para a mala de um tecnico. - Topic: dev.upsert.technician"
+      description: ""
+      responses:
+        200:
+          description: Sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessHttpResponse'
+        
+components:
+  schemas:
+  
+    SuccessHttpResponse:
+      type: object
+      properties:
+        message: 
+          type: string
+          example: Processing ...
+  
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+  
+    ProvisionHttpRequest:
+      type: object
+      properties:
+        origem:
+          type: string
+          example: "SALESFORCE ou ANIEL"
+        correlation_id:
+          type: string
+        contract_id:
+          type: integer
+        service_order_id:
+          type: string
+        contracted_plan:
+          type: string
+        plan_category:
+          type: string
+        aditional_plans:
+          type: array
+          items:
+            type: integer
+        promotion_id:
+          type: integer
+        customer_id:
+          type: integer
+        protocol_number:
+          type: integer
+        customer_full_name:
+          type: string
+        customer_main_document:
+          type: string
+          description: Apenas numeros.
+        customer_secondary_document:
+          type: string
+          description: Apenas numeros.
+        customer_email:
+          type: string
+        customer_phone:
+          type: integer
+        installation_street:
+          type: string
+        installation_number:
+          type: string
+        installation_complement:
+          type: string
+        installation_cep:
+          type: integer
+        installation_district:
+          type: string
+        installation_city:
+          type: string
+        installation_uf:
+          type: string
+          description: Apenas sigla do estado.
+        billing_street:
+          type: string
+        billing_number:
+          type: string
+        billing_complement:
+          type: string
+        billing_cep:
+          type: integer
+        billing_district:
+          type: string
+        billing_city:
+          type: string
+        billing_uf:
+          type: string
+          description: Apenas sigla do estado.
+        cto:
+          type: string
+        cto_port:
+          type: string
+        onu:
+          type: string
+        router:
+          type: string
+        stb_list:
+          type: array
+          items:
+            type: string
+        technician_name:
+          type: string
+        technician_company:
+          type: string
+      required:
+        - origem
+        - correlation_id
+        - contract_id
+        - service_order_id
+        - contracted_plan
+        - plan_category
+        - customer_id
+        - protocol_number
+        - customer_full_name
+        - customer_main_document
+        - customer_secondary_document
+        - customer_email
+        - customer_phone
+        - installation_street
+        - installation_number
+        - installation_cep
+        - installation_district
+        - installation_city
+        - installation_uf
+        - billing_street
+        - billing_number
+        - billing_cep
+        - billing_district
+        - billing_city
+        - billing_uf
+        - cto
+        - cto_port
+        - onu
+        - technician_name
+        - technician_company
+        
+    UpdatePlanSpeedRequest:
+      type: object
+      properties:
+        origem:
+          type: string
+          example: "SALESFORCE ou ANIEL"
+        correlation_id:
+          type: string
+        customer_id:
+          type: integer
+        customer_current_plan:
+          type: string
+        user_plan_id:
+          type: integer
+        contracted_plan:
+          type: string
+        fixed_discount:
+          type: integer
+        promotion:
+          type: integer
+      required:
+        - origem
+        - correlation_id
+        - user_plan_id
+        - customer_id
+        - customer_current_plan
+        - contracted_plan
+          
+    CertificateRequest:
+      type: object
+      properties:
+        origem:
+          type: string
+          example: "SALESFORCE ou ANIEL"
+        correlation_id:
+          type: string
+        reference_max_signal:
+          type: number
+          example: -24.99
+        reference_signal_tolerance:
+          type: number
+          example: 1.1
+        cto_client_threshold:
+          type: number
+        pu_id:
+          type: number
+          description: Plano id usuario
+        validate_cto_avg_signal:
+          type: boolean
+          description: Quando true, valida o sinal medio dos clientes na cto.
+      required:
+        - origem
+        - correlation_id
+        - reference_max_signal
+        - reference_signal_tolerance
+        - cto_client_threshold
+        - pu_id
+        - validate_cto_avg_signal
+          
+    ProtocolRequest:
+      type: object
+      properties:
+        opened_by_id:
+          type: integer
+          description: Este parâmetro indica o ID do usuário que abriu o procedimento.
+          example: 4998
+        opened_by_department_id:
+          type: integer
+          description: Este parâmetro indica o ID do departamento do usuário que abriu o procedimento.
+          example: 1
+        protocol_number:
+          type: integer
+          description: Este parâmetro especifica o número do protocolo associado ao procedimento.
+          example: 4202310160001
+      required:
+        - openedById
+        - openedByDepartmentId
+        - protocolNumber
+        
+    RecreatePlanRequestFull:
+      type: object
+      properties:
+        origem:
+          type: string
+          example: "SALESFORCE ou ANIEL"
+        correlation_id:
+          type: string
+        customer_id:
+          type: integer
+        user_plan_id:
+          type: integer
+        contracted_plan:
+          type: string
+        client_actual_plan:
+          type: string
+        contract_id:
+          type: integer
+        employee:
+          type: string
+        ativo_onu:
+          type: string
+        ativo_router:
+          type: string
+        ativos_stb:
+          type: array
+          items:
+            type: string
+        aditional:
+          type: array
+          items:
+            type: integer
+        fixed_discount:
+          type: integer
+        promotion:
+          type: integer
+        cto:
+          type: string
+        cto_port:
+          type: integer
+      required:
+        - origem
+        - correlation_id
+        - customer_id
+        - user_plan_id
+        - client_actual_plan
+        - contracted_plan
+        - contract_id
+        - employee
+        - ativo_onu
+        
+    InputRecreatePlanAddressChange:
+      properties:
+        origem:
+          type: string
+          example: "SALESFORCE ou ANIEL"
+        correlation_id:
+          type: string
+          title: Correlation Id
+          description: ID de transação da Salesforce
+          example: 34w5etfghb
+        user_plan_id:
+          type: integer
+          title: User Plan Id
+          description: ID do plano do usuário
+          example: '12345'
+        contracted_plan:
+          type: string
+          title: Contracted Plan
+          description: Plano contratado
+          example: T-F-19.50M.250G
+        contract_id:
+          type: integer
+          title: Contract Id
+          description: ID de contrato ou qualquer número aleatório para salvar em planos_usuarios_prospeccoes
+          example: '12345'
+        employee:
+          type: string
+          title: Employee
+          description: Login do operador
+          example: fulano.ciclano
+        ativo_onu:
+          type: string
+          title: Ativo Onu
+          description: Código do ativo da ONU
+          example: AB123456
+        cto:
+          type: string
+          title: Cto
+          description: Sigla do projeto e número da caixa cto
+          example: ABC-123
+        cto_port:
+          type: integer
+          title: Cto Port
+          description: Número da porta da caixa CTO
+          example: '1'
+        new_installation_street:
+          type: string
+          title: New Installation Street
+          description: Rua da casa de instalação do novo endereço
+          example: ''
+        new_installation_number:
+          type: string
+          title: New Installation Number
+          description: Número da casa de instalação novo endereço
+          example: ''
+        new_installation_cep:
+          type: string
+          title: New Installation Cep
+          description: CEP de instalação do novo endereço
+          example: ''
+        new_installation_district:
+          type: string
+          title: New Installation District
+          description: Bairro de instalação do novo endereço
+          example: ''
+        new_installation_city:
+          type: string
+          title: New Installation City
+          description: Cidade de instalação do novo endereço
+          example: ''
+        new_installation_uf:
+          type: string
+          title: New Installation Uf
+          description: Estado de instalação do novo endereço
+          example: ''
+        new_billing_street:
+          type: string
+          title: New Billing Street
+          description: Rua da casa de cobrança do novo endereço
+          example: ''
+        new_billing_number:
+          type: string
+          title: New Billing Number
+          description: Número de cobrança do novo endereço
+          example: ''
+        new_billing_cep:
+          type: string
+          title: New Billing Cep
+          description: CEP de cobrança do novo endereço
+          example: ''
+        new_billing_district:
+          type: string
+          title: New Billing District
+          description: Bairro de cobrança do novo endereço
+          example: ''
+        new_billing_city:
+          type: string
+          title: New Billing City
+          description: Cidade de cobrança do novo endereço
+          example: ''
+        new_billing_uf:
+          type: string
+          title: New Billing Uf
+          description: Estado de cobrança do novo endereço
+          example: ''
+        ativo_router:
+          type: string
+          title: Ativo Router
+          description: Código do ativo do roteador
+          example: AB123456
+        ativos_stb:
+          items:
+            type: string
+          type: array
+          title: Ativos Stb
+          description: Lista/Array de ativos STBs
+          default: []
+          example:
+            - AB123456
+            - AB123457
+        aditional:
+          items:
+            type: integer
+          type: array
+          title: Additional
+          description: Lista/Array de planos adicionais - id da tabela planos_adicionais
+          default: []
+          example:
+            - 9
+        fixed_discount:
+          type: number
+          title: Fixed Discount
+          description: Disconto fixo
+          example: '10.20'
+        promotion:
+          type: integer
+          title: Promotion
+          description: Id da promoção
+        new_installation_complement:
+          type: string
+          title: New Installation Complement
+          description: Complemento de instalação do novo endereço
+          example: ''
+        new_billing_complement:
+          type: string
+          title: New Billing Complement
+          description: Complemento de cobrança do novo endereço
+          example: ''
+      type: object
+      required:
+        - origem
+        - correlation_id
+        - user_plan_id
+        - contracted_plan
+        - contract_id
+        - employee
+        - ativo_onu
+        - cto
+        - cto_port
+        - new_installation_street
+        - new_installation_number
+        - new_installation_cep
+        - new_installation_district
+        - new_installation_city
+        - new_installation_uf
+        - new_billing_street
+        - new_billing_number
+        - new_billing_cep
+        - new_billing_district
+        - new_billing_city
+        - new_billing_uf
+      
+        
+    InputProvisionNewPlan:
+      properties:
+        origem:
+          type: string
+          example: "SALESFORCE ou ANIEL"
+        correlation_id:
+          type: string
+          title: Correlation Id
+          description: ID de transação da Salesforce
+          example: 34w5etfghb
+        customer_number:
+          type: integer
+          title: Adm do cliente
+          description: Adm do cliente
+          example: '12345'
+        contracted_plan:
+          type: string
+          title: Contracted Plan
+          description: Plano contratado
+          example: T-F-19.50M.250G
+        contract_id:
+          type: integer
+          title: Contract Id
+          description: ID de contrato ou qualquer número aleatório para salvar em planos_usuarios_prospeccoes
+          example: '12345'
+        employee:
+          type: string
+          title: Employee
+          description: Login do operador
+          example: fulano.ciclano
+        ativo_onu:
+          type: string
+          title: Ativo Onu
+          description: Código do ativo da ONU
+          example: AB123456
+        cto:
+          type: string
+          title: Cto
+          description: Sigla do projeto e número da caixa cto
+          example: ABC-123
+        cto_port:
+          type: integer
+          title: Cto Port
+          description: Número da porta da caixa CTO
+          example: '1'
+        ativo_router:
+          type: string
+          title: Ativo Router
+          description: Código do ativo do roteador
+          example: AB123456
+        ativos_stb:
+          items:
+            type: string
+          type: array
+          title: Ativos Stb
+          description: Lista/Array de ativos STBs
+          default: []
+          example:
+            - AB123456
+            - AB123457
+        aditional:
+          items:
+            type: integer
+          type: array
+          title: Additional
+          description: Lista/Array de planos adicionais - id da tabela planos_adicionais
+          default: []
+          example:
+            - 9
+        fixed_discount:
+          type: number
+          title: Fixed Discount
+          description: Disconto fixo
+          example: '10.20'
+        promotion:
+          type: integer
+          title: Promotion
+          description: Id da promoção
+        
+      type: object
+      required:
+        - origem
+        - correlation_id
+        - customer_number
+        - contracted_plan
+        - contract_id
+        - employee
+        - ativo_onu
+        - cto
+        - cto_port
+        - new_installation_street
+        - new_installation_number
+        - new_installation_cep
+        - new_installation_district
+        - new_installation_city
+        - new_installation_uf
+        - new_billing_street
+        - new_billing_number
+        - new_billing_cep
+        - new_billing_district
+        - new_billing_city
+        - new_billing_uf

@@ -5,4 +5,5 @@ metadata:
   description: A collection of all Backstage example APIs
 spec:
   targets:
-    - ./apis/customer-service-barramento-api.yaml 
+    - ./apis/customer-service-barramento-api.yaml
+    - ./apis/field-barramento-api.yaml
