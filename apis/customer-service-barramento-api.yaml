@@ -6,7 +6,7 @@ spec:
   type: grpc
   lifecycle: experimental
   owner: team-deskforce
-  system: examples
+  system: interaction
   definition: |
     syntax = "proto3";
 
