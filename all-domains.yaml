@@ -4,9 +4,7 @@ metadata:
   name: domains-desktop
   description: Todos os Domínios da Desktop
 spec:
-  targets:    
-    - ./domains/desktop-resource-domain.yaml
-    - ./domains/desktop-resource-field-domain.yaml
+  targets:        
     - ./domains/mktsales-domain.yaml
     - ./domains/product-domain.yaml
     - ./domains/service-domain.yaml
