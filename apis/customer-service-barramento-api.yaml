@@ -1,21 +1,20 @@
-apiVersion: backstage.iov1alpha1
+apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: barramento-service 
-  description: Api responsável pela integração Salesforce
-  tags:
-    - store
-    - rest
-  links:
-    - url: httpsgithub.comswagger-apiswagger-petstore
-      title: GitHub Repo
-      icon: github
-    - url: httpsgithub.comswagger-apiswagger-petstoreblobmastersrcmainresourcesopenapi.yaml
-      title: API Spec
-      icon: code
+  name: example-grpc-api4
 spec:
-  type: openapi
-  lifecycle: production
+  type: grpc
+  lifecycle: experimental
   owner: team-deskforce
-  definition:
-    $text: .barramento-service-api-swagger.yaml
+  system: examples
+  definition: |
+    syntax = "proto3";
+
+    service Exampler {
+      rpc Example (ExampleMessage) returns (ExampleMessage) {};
+    }
+
+    message ExampleMessage {
+      string example = 1;
+    };
+
