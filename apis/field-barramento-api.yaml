@@ -2,13 +2,15 @@ apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: barramento-field-api
-  description: The petstore API
-  tags:
-    - store
-    - rest
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/SS/pages/137396225/Documenta+o+Barramento+-+Service
+    title: Confluence
+    icon: code
 spec:
   type: openapi
   lifecycle: experimental
   owner: team-deskforce
+  system: interaction
   definition:
-    $text: ./petstore.oas.yaml
+    $text: ./barramento-service-api-swagger.yaml
+
