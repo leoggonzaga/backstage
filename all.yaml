@@ -8,4 +8,5 @@ spec:
     - all-systems.yaml
     - all-resources.yaml
     - all-domains.yaml
+    - all-apis.yaml
     
