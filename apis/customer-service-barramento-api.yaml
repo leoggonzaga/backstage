@@ -7,14 +7,6 @@ spec:
   lifecycle: experimental
   owner: team-deskforce
   system: interaction
-  definition: |
-    syntax = "proto3";
-
-    service Exampler {
-      rpc Example (ExampleMessage) returns (ExampleMessage) {};
-    }
-
-    message ExampleMessage {
-      string example = 1;
-    };
+  definition:
+    $text: ./barramento-service-api-swagger.yaml
 
