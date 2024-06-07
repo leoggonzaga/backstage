@@ -1,21 +1,20 @@
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: petstorekk
-  description: The petstore API
-  tags:
-    - store
-    - rest
-  links:
-    - url: https://github.com/swagger-api/swagger-petstore
-      title: GitHub Repo
-      icon: github
-    - url: https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml
-      title: API Spec
-      icon: code
+  name: example-grpc-api2
 spec:
-  type: openapi
+  type: grpc
   lifecycle: experimental
-  owner: team-c
-  definition:
-    $text: ./petstore.oas.yaml
+  owner: guests
+  system: examples
+  definition: |
+    syntax = "proto3";
+
+    service Exampler {
+      rpc Example (ExampleMessage) returns (ExampleMessage) {};
+    }
+
+    message ExampleMessage {
+      string example = 1;
+    };
+
