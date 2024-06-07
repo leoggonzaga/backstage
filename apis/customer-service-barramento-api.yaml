@@ -1,12 +1,12 @@
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: barramento-service-api
+  name: barramento-service
 spec:
-  type: openapi
-  lifecycle: producao
+  type: grpc
+  lifecycle: experimental
   owner: team-deskforce
-  system: interaction
+  system: examples
   definition: |
     syntax = "proto3";
 
