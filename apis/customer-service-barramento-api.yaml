@@ -1,20 +1,17 @@
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: example-grpc-api4
+  name: barramento-service
+links:
+  - url: https://desktop.atlassian.net/wiki/spaces/SS/pages/137396225/Documenta+o+Barramento+-+Service
+    title: Confluence
+    icon: code
 spec:
-  type: grpc
-  lifecycle: experimental
+  type: openapi
+  lifecycle: producao
   owner: team-deskforce
-  system: examples
-  definition: |
-    syntax = "proto3";
-
-    service Exampler {
-      rpc Example (ExampleMessage) returns (ExampleMessage) {};
-    }
-
-    message ExampleMessage {
-      string example = 1;
-    };
+  system: interaction
+  definition:
+    $text: ./barramento-service-api-swagger.yaml
+    
 
