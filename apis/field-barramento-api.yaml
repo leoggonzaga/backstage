@@ -8,9 +8,9 @@ metadata:
     icon: code
 spec:
   type: openapi
-  lifecycle: experimental
+  lifecycle: producao
   owner: team-deskforce
   system: interaction
   definition:
-    $text: ./barramento-service-api-swagger.yaml
+    $text: ./field-barramento-swagger.yaml
 
