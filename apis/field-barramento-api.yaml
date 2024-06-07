@@ -3,7 +3,7 @@ kind: API
 metadata:
   name: barramento-field-api
   links:
-  - url: https://desktop.atlassian.net/wiki/spaces/SS/pages/137396225/Documenta+o+Barramento+-+Service
+  - url: https://desktop.atlassian.net/wiki/spaces/SS/pages/163741731/Documenta+o+Barramento+-+Field
     title: Confluence
     icon: code
 spec:
