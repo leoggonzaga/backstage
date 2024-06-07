@@ -5,7 +5,7 @@ metadata:
 spec:
   type: grpc
   lifecycle: experimental
-  owner: guests
+  owner: team-deskforce
   system: examples
   definition: |
     syntax = "proto3";
