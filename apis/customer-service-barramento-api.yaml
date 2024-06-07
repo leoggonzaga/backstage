@@ -3,7 +3,7 @@ kind: API
 metadata:
   name: barramento-service-api
 spec:
-  type: grpc
+  type: openapi
   lifecycle: experimental
   owner: team-deskforce
   system: interaction
