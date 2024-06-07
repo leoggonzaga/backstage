@@ -5,5 +5,5 @@ metadata:
   description: A collection of all Backstage example resources
 spec:
   targets:
-    - ./recursos/admin-db-rsc.yaml
-    - ./recursos/kafka-mq.yaml
+    - ./resources/adm-mysql-db-rsc.yaml
+    - ./resources/kafka-mq.yaml

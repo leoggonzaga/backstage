@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: legado
+  description: Domínio com o papel de concentrar todos os serviços existentes antes da separação de domínios
+  links:
+    - url: http://desktop.com.br/domain/desktop-resource/
+      title: Domain Readme
+      icon: dashboard
+spec:
+  owner: desktop-corp

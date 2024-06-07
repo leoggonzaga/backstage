@@ -1,0 +1,2497 @@
+openapi: 3.0.1
+info:
+  title: Desktop Gateway API
+  description: Documentação integração Salesforce
+  license:
+    name: © 2021 DESKTOP INTERNET SERVICES | CNPJ 08.170.849/0001-15
+    url: http://www.desktop.com.br
+  version: v1.0.3.13
+
+servers:
+  - url: https://api-sandbox.desktop.com.br/ 
+    description: Sandbox endpoint
+  - url: https://api-v2.desktop.com.br/
+    description: Production endpoint
+    
+paths:
+  /cx/v1/massive/{document}/{customer_id}:
+    get:
+      tags: ["massive"]
+      summary: "Retorna lista de contratos com problemas massivo"
+      description: "Verifica se existem massivas abertas para um cliente e retorna as informações das mesmas se encontradas"
+      parameters:
+        - name: document
+          in: path
+          description: "Documento do cliente (CPF - somente números)"
+          required: true
+          schema:
+            type: string
+          example: "12345678945"
+        - name: customer_id
+          in: path
+          description: "ID do cliente"
+          required: true
+          schema:
+            type: integer
+          example: 1234567
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MassiveHttpResponseModel'
+        '400':
+          description: Os documentos passados não estão vinculados.  
+        '404':
+          description: "Recurso não encontrado"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Sem massivas:
+                  value:
+                    message: "Não existem massivas para a area do usuario."
+        500:
+          description: "Erro interno de servidor, abrir um chamado no GLPI."
+          
+  /cx/v1/massive/incident-history:
+    get:
+      tags: ["massive"]
+      summary: "Retorna lista de incidentes massivos."
+      description: "Serviço que lista todos os incidentes massivos passada uma determinada data."
+      parameters:
+        - name: finish_date
+          in: query
+          description: "Data especifica para listagem de incidentes."
+          required: true
+          schema:
+            type: string
+          example: "01/01/2024"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MassiveIncidentResponse'
+        400:
+          description: "Parâmetros de entrada invalidos."
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Data invalida:
+                  value:
+                    message: "Data inválida, verifique novamente."
+                Paâmetros de entrada invalidos:
+                  value:
+                    message: "Parâmetros de entrada invalidos, por favor revisar."
+        500:
+          description: "Erro interno de servidor, abrir um chamado no GLPI."
+                
+
+  /cx/v1/wifi/password:
+    put:
+      tags: ["wifi-password"]
+      summary: "Reseta/Altera a senha do wifi do usuário"
+      description: "Reseta/Altera a senha do usuário pelo numero do contrato do cliente"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordWifiRequestDTO'
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateEmailResponse'
+        404:
+          description: "Cliente não encontrado"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Usuario nao encontrado:
+                  value:
+                    message: "Os documentos passados não foram encontrados."
+                Dados invalidos:
+                  value:
+                    message: "Dados inseridos inválidos, necessário revisar."        
+        500:
+          description: "Erro interno de servidor, abrir um chamado no GLPI."
+        400:
+          description: "Os documentos passados não estão vinculados."
+
+  /cx/v1/network/status/consumption/{document}/{login}/{customer_id}:
+    get:
+      tags:
+        - "status-consumption"
+      summary: "Status de consumo"
+      description: "Retorna informações de status de consumo dos últimos três meses"
+      parameters:
+        - name: "document"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+          example: "14569808788"
+        - name: "login"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "int64"
+          example: "650104.2@desktop.com.br"
+        - name: "customer_id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+          example: 650104
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExternalConsumptionStatusResponse"
+        400:
+          description: "Erro de validação de entrada"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/InvalidLoginError"
+                  - $ref: "#/components/schemas/MissingFieldsError"
+                  - $ref: "#/components/schemas/NumberUserInvalid"
+              examples:
+                invalidLogin:
+                  value:
+                    message: "Login inválido"
+                missingFields:
+                  value:
+                    message: "Campos obrigatórios estão faltando."
+                numberUserInvalid:
+                  value:
+                    message: "Número do ADM inválido"
+                    
+        404:
+          description: "Cliente não encontrado"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Usuario nao encontrado:
+                  value:
+                    message: "Os documentos passados não foram encontrados."
+                Cliente inativo:
+                  value:
+                    message: "Cliente está inativo ou não possui plano de internet contratado."            
+
+  /cx/v1/unlock/plan:
+    put:
+      tags: ["unlock-plan"]
+      summary: Desbloqueio de confiança
+      description: Desbloquear plano de internet por 72h aguardando pagamento da conta em 48h
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnlockPlanDto'
+      responses:
+        200:
+          description: Desbloqueado
+        '404':
+          description: "Recurso não encontrado"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Contrato nao encontrado:
+                  value:
+                    message: "Os documentos passados não foram encontrados."
+                Documentos não vinculados:
+                  value:
+                    message: "Os documentos passados não estão vinculados."
+        400:
+          description: "Dados inseridos inválidos."
+        409:
+          description: "Conflito"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Boleto vencido:
+                  value:
+                    message: "Cliente nao esta apto para desbloqueio pois possui 1 ou mais faturas vencidas a mais de 10 dias."
+                Desbloqueio nos ultimos 30 dias:
+                  value:
+                    message: "Já existe um desbloqueio confiável nos últimos 30 dias."
+
+  /cx/v1/network/device_resync:
+    put:
+      tags:
+        - resync
+      summary: Resync device
+      description: Aplica comando resync no dispositivo de ressincronização.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetRequest'
+      responses:
+        '200':
+          description: Ok
+        '400':
+          description: Os documentos passados não estão vinculados.
+        '404':
+          description: "Recurso não encontrado"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Usuario nao encontrado:
+                  value:
+                    message: "Os documentos passados não foram encontrados."
+                Dispositivo não provisionado:
+                  value:
+                    message: "Dispositivo não provisionado no ACS."
+          
+  /cx/v1/network/onu_resync:
+    put:
+      tags:
+        - resync
+      summary: Resync onu
+      description: Aplica comando resync no dispositivo onu.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetRequest'
+      responses:
+        '200':
+          description: Ok
+        '400':
+          description: Os documentos passados não foram encontrados.  
+        '404':
+          description: "Recurso não encontrado"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Usuario nao encontrado:
+                  value:
+                    message: "Erro ao encontrar informações do cliente."
+                Dispositivo não provisionado:
+                  value:
+                    message: "ONU não provisionada."
+                Documento não encontrado:
+                  value:
+                    message: "Os documentos passados não foram encontrados."
+          
+  /cx/v1/network/reboot/device:
+    put:
+      tags:
+        - reboot
+      summary: Reboot device
+      description: Reboot de dispositivo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RebootRequest'
+      responses:
+        200:
+          description: "Ok."
+        '400':
+          description: "Os documentos passados não foram encontrados."
+        '404':
+          description: "Recurso não encontrado"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Usuario nao encontrado:
+                  value:
+                    message: "Erro ao encontrar informações do cliente."
+                Dispositivo não provisionado:
+                  value:
+                    message: "Dispositivo não provisionado."
+                Documento não encontrado:
+                  value:
+                    message: "Os documentos passados não foram encontrados."
+    
+  /cx/v1/network/reboot/onu:
+    put:
+      tags: 
+        - reboot
+      summary: Reboot onu
+      description: Reboot da onu
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RebootRequest'
+      responses:
+        200:
+          description: "Ok."
+        '400':
+          description: Os documentos passados não estão vinculados.
+        '404':
+          description: "Recurso não encontrado"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Dispositivo não provisionado:
+                  value:
+                    message: "ONU não provisionada."
+                Usuario nao encontrado:
+                  value:
+                    message: "Erro ao encontrar informações do cliente."
+                Documento não encontrado:
+                  value:
+                    message: "Os documentos passados não foram encontrados."
+                  
+  /cx/v1/customer/service/charge/address-fee:
+    post:
+      tags: ["customer-charge"]
+      summary: "Inclusão de mudança de endereço."
+      description: "Api para inclusão de mudança de endereço."
+      requestBody:
+        content:
+          application:json:
+            schema:
+              $ref: '#/components/schemas/AddressFeeExternalRequest'
+      responses:
+        200:
+          description: "Sucesso."
+        400:
+          description: "Erro de entrada."
+          content:
+            application:json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Taxa gratuita para cliente:
+                  value:
+                    message: "Cliente com taxa de alteração gratuita."
+                Documentos não vinculados:
+                  value:
+                    message: "Os documentos passados não estão vinculados."
+        404:
+          description: "Recurso não encontrado"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Documento não encontrado:
+                  value:
+                    message: "Os documentos passados não foram encontrados."
+                Inativo:
+                  value:
+                    message: "Cliente inativo."
+                    
+  /cx/v1/customer/service/charge/due-date:
+    get:
+      tags: ["customer-charge"]
+      summary: "Listagem data de vencimento fatura cliente."
+      description: "Api para listar datas de vencimento para a fatura do cliente."
+      parameters:
+        - name: customer_id
+          in: query
+          description: Adm do cliente / LegacyId do cliente
+          required: true
+          schema: 
+            type: integer
+          example: 6
+      responses:
+        200:
+          description: 'Sucesso.'
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/ListDueDateResponse' 
+        400:
+          description: "Dados inseridos inválidos."          
+        404:
+          description: "Cliente não encontrado."
+        424:
+          description: "Erro na listagem de data de vencimento da fatura."
+        500:
+          description: "Erro interno de servidor, abrir um chamado no GLPI."
+          
+  /cx/v1/customer/service/charge/update-due-date:
+    put:
+      tags: ["customer-charge"]
+      summary: "Atualização data de vencimento fatura cliente."
+      description: "Api para atualizar datas de vencimento para a fatura do cliente."
+      parameters:
+        - name: customer_id
+          in: query
+          description: Adm do cliente / LegacyId do cliente
+          required: true
+          schema: 
+            type: integer
+          example: 6
+        - name: new_due_date
+          in: query
+          description: Nova data para vencimento (10/15/20)
+          required: true
+          schema: 
+            type: integer
+          example: 10
+      responses:
+        200:
+          description: "Data de vencimento atualizada com sucesso!"
+        400:
+          description: "Erro validação de entrada"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Nova data invalida:
+                  value:
+                    message: "O dia selecionado é inválido, necessário revisar."
+                Parametros invalidos:
+                  value:
+                    message: "Dados inseridos inválidos."         
+        404:
+          description: "Cliente não encontrado."
+        424:
+          description: "Erro na atualização da data de vencimento da fatura."
+        500:
+          description: "Erro interno de servidor, abrir um chamado no GLPI."
+          
+  /cx/v1/customer/service/charge/get-fees:
+    get:
+      tags: ["customer-charge"]
+      summary: "Calcula pendencias de um cliente para um boleto e determinada data."
+      description: "Api para calcular pendencias de um cliente para um boleto e determinada data."
+      parameters:
+        - name: value
+          in: query
+          description: Valor do boleto
+          required: true
+          schema: 
+            type: integer
+          example: 50.99
+        - name: due_at
+          in: query
+          description: Data de vencimento
+          required: true
+          schema: 
+            type: string
+          example: "20/01/2024"
+      responses:
+        200:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/ClientFeeResponse"
+        400:
+          description: "Erro validação de entrada"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Data de vencimento invalida:
+                  value:
+                    message: "Data de vencimento inválida, verifique novamente."
+                Parametros invalidos:
+                  value:
+                    message: "Dados enviados de forma incorreta, verifique novamente."         
+        500:
+          description: "Erro interno de servidor, abrir um chamado no GLPI."
+      
+                    
+  /cx/v1/customer/service/charge/open-billets/pdf:
+      get:
+        tags: ["customer-charge"]
+        summary: "2ª via de boleto"
+        description: "Busca a segunda via de boleto"
+        parameters:
+          - name: document
+            in: query
+            description: "CPF do cliente"
+            required: true
+            schema:
+              type: string
+            example: "12345678945"
+          - name: customer_id
+            in: query
+            description: "ID do cliente"
+            required: true
+            schema:
+              type: integer
+            example: 1234567
+          - name: system
+            in: query
+            description: "ID do sistema que está consumindo a Api. 1 para Salesforce e Whatsapp, 0 para App."
+            required: true
+            schema:
+              type: integer
+            example: 0 / 1
+        responses:
+          200:
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OpenBilletsResponse'          
+          400:
+            description: Os documentos passados não estão vinculados.
+          404:
+            description: Os documentos passados para este cliente não foram encontrados.
+                
+              
+              
+  /cx/v1/customer/service/charge/last-twelve-billets/{document}/{customerId}:
+    get:
+      tags: ["customer-charge"]
+      summary: "Posição financeira"
+      description: "Retona os ultimos 12 boletos"
+      parameters:
+        - name: document
+          in: path
+          description: "CPF do cliente"
+          required: true
+          schema:
+            type: string
+          example: "12345678945"
+        - name: customerId
+          in: path
+          description: "ID do cliente"
+          required: true
+          schema:
+            type: integer
+          example: 1234567
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/LastTwelveBilletsResponse'          
+        400:
+          description: "Os documentos passados não estão vinculados."
+        404:
+          description: "Os documentos passados não foram encontrados."
+          
+          
+  /cx/v1/customer/service/charge/billet/{billetCode}/email:
+    post:
+      tags: ["customer-charge"]
+      summary: "Envio 2ª via boleto por email."
+      description: "Envia por email a 2ª via do boleto com base no codigo passado."
+      parameters:
+        - name: billetCode
+          in: path
+          description: "Codigo do boleto"
+          required: true
+          schema:
+            type: integer
+        - name: email
+          in: query
+          description: "Email do cliente"
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Sucesso.'
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/UpdateEmailResponse'
+        400:
+          description: "O e-mail informado é inválido, necessário revisar."
+        404:
+          description: "Boleto não encontrado."
+        500:
+          description: "Erro interno de servidor, abrir um chamado no GLPI."
+            
+          
+  /cx/v1/customer/service/user/update-customer-data:
+    put:
+      tags: ["customer-data"]
+      summary: Atualizar cadastro cliente.
+      description: Permite atualizar o cadastro unificado do cliente de maneira flexivel. Para atualizar email apenas, passar objeto pai phone como null, para atualizar telefone apenas, passar objeto pai email como null. A api tambem permite passar os dois campos validos ao mesmo tempo. É importante destacar que, é possivel cadastras mais de um email por vez, como esta descrito no example do body de entrada (Passar emails separados por virgula). Por regras internas, para inclusão ou atualização de email, é preciso passar todos ja existentes no body de entrada, caso isso não seja respeitado, os emails anteriores serão perdidos.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomerInfoDTO'
+      responses:
+        200:
+          description: "Os dados foram atualizados com sucesso."
+        400:
+          description: "Erro validação de entrada"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro documento:
+                  value:
+                    message: "Os documentos passados não estão vinculados."
+                Sintaxe invalida:
+                  value:
+                    message: "O email informado é inválido, necessário revisar."
+                Telefone ou dado invalido:
+                  value:
+                    message: "Não foi possível alterar o número devido a dados ou telefone inválidos."
+        404:
+          description: "Dados não encontrados"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Dados não encontrados:
+                  value:
+                    message: "Os documentos passados para este cliente não foram encontrados."
+                Cliente não encontrado:
+                  value:
+                    message: "Cliente não encontrado."
+                Cliente não encontrado ou inativo:
+                  value:
+                    message: "Cliente não encontrado ou inativo."
+        409:
+          description: "Erro de entrada"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Telefone ja cadastrado:
+                  value:
+                    message: "Esse número de telefone já existe."
+                    
+  /cx/v1/customer/service/user/delete-phone:
+    delete:
+      tags: ["customer-data"]
+      summary: Remover telefone cadastrado do cliente.
+      description: Permite remover o telefone cadastrado do cliente.
+      parameters:
+        - name: customer_id
+          in: query
+          required: true
+          description: Adm do cliente / Legacy Id do cliente.
+          schema: 
+            type: integer
+        - name: phone_number
+          in: query
+          required: true
+          description: Telefone para ser removido.
+          example: 11996651111 / 1133379968
+          schema: 
+            type: string
+      responses:
+        200:
+          description: "Telefone removido com sucesso."
+        400:
+          description: "Dados inseridos inválidos."
+        404:
+          description: "Dados não encontrados."
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Cliente inativo:
+                  value:
+                    message: "O cliente {ADM} esta inativo"
+                Cliente não encontrado:
+                  value:
+                    message: "Cliente não encontrado."
+                Telefone nao encontrado:
+                  value:
+                    message: "Telefone {Telefone} informado nao encontrado"
+        500:
+          description: "Erro interno de servidor, abrir um chamado no GLPI."
+                          
+  /cx/v1/customer/service/user/add-phone:
+    post:
+      tags: ["customer-data"]
+      summary: Inserir numero para contato.
+      description: Permite inserir um numero para contado do cliente.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalPhoneRequest'
+      responses:
+        200:
+          description: "Telefone inserido com sucesso."
+        400:
+          description: "O telefone informado já existe ou é inválido, necessário revisar."
+        404:
+          description: "Cliente não encontrado."
+        500:
+          description: "Erro interno de servidor, abrir um chamado no GLPI."
+          
+  /cx/v1/customer/service/user/service-history:
+    get:
+      tags: ["customer-data"]
+      summary: Recuperar historico de atendimento.
+      description: Este serviço permite recuperar o historico de atendimento para um determinado cliente.
+      parameters:
+        - name: customer_id
+          in: query
+          required: true
+          description: Adm do cliente / Legacy Id do cliente.
+          schema: 
+            type: integer
+      responses:
+        200:
+          description: 'Sucesso.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/ExternalServiceHistory' 
+        400:
+          description: "Dados de entrada invalidos."
+        404:
+          description: "Erro ao processar solicitação"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Cliente não encontrado:
+                  value:
+                    message: "Cliente não encontrado."
+                Registros inexistentes:
+                  value:
+                    message: "Cliente não possui registros de atendimento."
+        500:
+          description: "Erro interno de servidor, abrir um chamado no GLPI."
+                    
+  /cx/v1/service/technical-tests/traffic-controller/{ppoeUser}/{quantity}/{frequency}:
+    get:
+      tags: ["technical-tests"]
+      summary: Grupo de api's para testes tecnicos.
+      description: Permite checar o trafego da conexão do cliente.
+      parameters:
+        - name: ppoeUser
+          in: path
+          required: true
+          schema: 
+            type: string
+        - name: quantity
+          in: path
+          required: true
+          schema: 
+            type: integer
+        - name: frequency
+          in: path
+          required: true
+          schema: 
+            type: integer
+      responses:
+        200:
+          description: "Sucesso" 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrafficResponse'
+        404:
+          description: "Erro ao processar solicitação"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro ao processar solicitação:
+                  value:
+                    message: "Erro ao processar solicitação."
+        500:
+          description: "Erro interno de servidor"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro interno de servidor:
+                  value:
+                    message: "Algo ocorreu errado. Entre em contato com o administrador."
+                    
+  /cx/v1/service/technical-tests/current-connection:
+    get:
+      tags: ["technical-tests"]
+      summary: Grupo de api's para testes tecnicos.
+      description: "Permite checar o status da conexão do cliente. O array de Logs vai registrar os momentos de desconexão e outros aspectos do cliente." 
+      parameters:
+        - name: ppoeUser
+          in: query
+          required: true
+          schema: 
+            type: string
+      responses:
+        200:
+          description: "Sucesso" 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionResponse'
+        404:
+          description: "Erro ao processar solicitação"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro ao processar solicitação:
+                  value:
+                    message: "Erro ao processar solicitação."
+        500:
+          description: "Erro interno de servidor"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro interno de servidor:
+                  value:
+                    message: "Algo ocorreu errado. Entre em contato com o administrador."
+                    
+  /cx/v1/service/technical-tests/general/connection-status:
+    get:
+      tags: ["technical-tests"]
+      summary: Grupo de api's para testes tecnicos.
+      description: Permite checar informações gerais da conexão do cliente.
+      parameters:
+        - name: ppoeUser
+          in: query
+          required: true
+          schema: 
+            type: string
+      responses:
+        200:
+          description: "Sucesso" 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionStatusResponse'
+        404:
+          description: "Erro ao encontrar informações"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro ao processar solicitação:
+                  value:
+                    message: "Erro ao encontrar informações do cliente."
+        500:
+          description: "Erro interno de servidor"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro interno de servidor:
+                  value:
+                    message: "Algo ocorreu errado. Entre em contato com o administrador."
+                    
+  /cx/v1/service/technical-tests/box-status:
+    get:
+      tags: ["technical-tests"]
+      summary: Grupo de api's para testes tecnicos.
+      description: Permite checar informações gerais da caixa.
+      parameters:
+        - name: numeroCaixa
+          in: query
+          required: true
+          schema: 
+            type: string
+        - name: idGrupo
+          in: query
+          required: true
+          schema: 
+            type: string
+        - name: technology
+          in: query
+          required: true
+          schema: 
+            type: string    
+      responses:
+        200:
+          description: "Sucesso" 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BoxStatusResponse'
+        404:
+          description: "Erro ao encontrar informações"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro ao processar solicitação:
+                  value:
+                    message: "Erro ao encontrar informações do cliente."
+        500:
+          description: "Erro interno de servidor"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro interno de servidor:
+                  value:
+                    message: "Algo ocorreu errado. Entre em contato com o administrador."
+                    
+  /cx/v1/service/technical-tests/bridge-status:
+    get:
+      tags: ["technical-tests"]
+      summary: Grupo de api's para testes tecnicos.
+      description: "Permite checar informações gerais da bridge do cliente. Para cada aba, passar os parametros disponiveis: VOIP - VIDEO - DADOS, (no parâmetro vlan) respectivamente abas : Voz - Video - Dados. A aba status lan recebe o parâmetro em serial, passando o serial do equipamento. O de-para desse campo esta disponivel em /connection-status, campo adm.roteador_adicional. Os parametros vlan e serial devem ser passados de forma separada, caso ambos estejam presentes, o retorno irá priorizar a aba status lan. No objeto de retorno, as informações sobre: Voz/Video/Dados estarão representadas em 'olt', status lan em 'acs'. "
+      parameters:
+        - name: ip
+          in: query
+          required: true
+          schema: 
+            type: string
+        - name: slot
+          in: query
+          required: true
+          schema: 
+            type: string
+        - name: olt
+          in: query
+          required: true
+          schema: 
+            type: string
+        - name: onu
+          in: query
+          required: true
+          schema: 
+            type: string
+        - name: fsan
+          in: query
+          required: true
+          schema: 
+            type: string
+        - name: vlan
+          in: query
+          required: false
+          schema: 
+            type: string
+        - name: serial
+          in: query
+          required: false
+          schema: 
+            type: string
+      responses:
+        200:
+          description: "Sucesso" 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BridgeResponse'
+        404:
+          description: "Erro ao encontrar informações"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro ao processar solicitação:
+                  value:
+                    message: "Erro ao encontrar informações do cliente."
+        500:
+          description: "Erro interno de servidor"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro interno de servidor:
+                  value:
+                    message: "Algo ocorreu errado. Entre em contato com o administrador."
+                    
+  /cx/v1/service/technical-tests/gpon:
+    get:
+      tags: ["technical-tests"]
+      summary: Grupo de api's para testes tecnicos.
+      description: "Permite checar informações gerais que envolvem gpon e infos adicionais do cliente."
+      parameters:
+        - name: ip
+          in: query
+          required: true
+          schema: 
+            type: string
+        - name: slot
+          in: query
+          required: true
+          schema: 
+            type: string
+        - name: olt
+          in: query
+          required: true
+          schema: 
+            type: string
+        - name: onu
+          in: query
+          required: true
+          schema: 
+            type: string
+        - name: fsan
+          in: query
+          required: true
+          schema: 
+            type: string
+        - name: pppoeUser
+          in: query
+          required: true
+          schema: 
+            type: string
+      responses:
+        200:
+          description: "Sucesso" 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GponGeneralResponse'
+        404:
+          description: "Erro ao encontrar informações"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro ao processar Onu Status:
+                  value:
+                    message: "Erro ao processar solicitação na camada de Onu Status."
+                Erro ao processar Onu info:
+                  value:
+                    message: "Erro ao processar solicitação na camada de Onu Info."
+                Erro ao processar Onu radius:
+                  value:
+                    message: "Erro ao processar solicitação na camada de Onu Radius."
+                
+        500:
+          description: "Erro interno de servidor"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro interno de servidor:
+                  value:
+                    message: "Algo ocorreu errado. Entre em contato com o administrador."
+                    
+  /cx/v1/service/technical-tests/connection_info/{ppoeUser}:
+    get:
+      tags: ["technical-tests"]
+      summary: Grupo de api's para testes tecnicos.
+      description: Permite checar informações gerais da conexão do usuário.
+      parameters:
+        - name: ppoeUser
+          in: path
+          required: true
+          schema: 
+            type: string
+      responses:
+        200:
+          description: "Sucesso" 
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/ConnectionInfoResponse'
+        404:
+          description: "Erro ao encontrar informações"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro ao processar solicitação:
+                  value:
+                    message: "Erro ao processar solicitação."
+        500:
+          description: "Erro interno de servidor"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro interno de servidor:
+                  value:
+                    message: "Algo ocorreu errado. Entre em contato com o administrador."
+                    
+  /cx/v1/service/technical-tests/last_logs/{userPlanId}:
+    get:
+      tags: ["technical-tests"]
+      summary: Grupo de api's para testes tecnicos.
+      description: Permite checar os ultimos logs da conexão do usuário.
+      parameters:
+        - name: userPlanId
+          in: path
+          required: true
+          schema: 
+            type: string
+      responses:
+        200:
+          description: "Sucesso" 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LastLogsresponse'
+        404:
+          description: "Erro ao processar solicitação."
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro ao processar solicitação:
+                  value:
+                    message: "Dados não encontrados, verifique o identificador do plano do usuário."
+        500:
+          description: "Erro interno de servidor"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro interno de servidor:
+                  value:
+                    message: "Algo ocorreu errado. Entre em contato com o administrador."
+                    
+  /cx/v1/service/technical-tests/network_consumption/{userPlanId}/{month}/{year}:
+    get:
+      tags: ["technical-tests"]
+      summary: Grupo de api's para testes tecnicos.
+      description: Permite checar informações gerais do consumo de rede do usuário.
+      parameters:
+        - name: userPlanId
+          in: path
+          required: true
+          schema: 
+            type: string
+        - name: month
+          in: path
+          required: true
+          schema: 
+            type: integer
+        - name: year
+          in: path
+          required: true
+          schema: 
+            type: integer
+      responses:
+        200:
+          description: "Sucesso" 
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/NetworkConsumptionResponse'
+        404:
+          description: "Erro ao processar solicitação."
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro ao processar solicitação:
+                  value:
+                    message: "Dados não encontrados, verifique os parametros de entrada."
+        422:
+          description: "Erro de entrada."
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro de entrada:
+                  value:
+                    message: "Dados incorretos, verifique os pametros de entrada."
+        500:
+          description: "Erro interno de servidor"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro interno de servidor:
+                  value:
+                    message: "Algo ocorreu errado. Entre em contato com o administrador."
+                    
+  /cx/v1/service/technical-tests/infrastructure/router:
+    get:
+      tags: ["technical-tests"]
+      summary: Grupo de api's para testes tecnicos.
+      description: Permite checar informações do roteador do cliente.
+      parameters:
+        - name: plan_login
+          in: query
+          required: true
+          description: Login do cliente.
+          example: 1234.1@desktop.com.br
+          schema: 
+            type: string
+      responses:
+        200:
+          description: https://123.123.12.12:12
+        404:
+          description: "Erro ao encontrar informações"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro ao processar solicitação:
+                  value:
+                    message: Nenhuma informação para o roteador do cliente 123.1@desktop.com.br foi encontrada.
+        500:
+          description: "Erro interno de servidor"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro interno de servidor:
+                  value:
+                    message: "Algo ocorreu errado. Entre em contato com o administrador."
+                    
+  /cx/v1/service/primary-box/list-projects:
+    get:
+      tags: ["primary-box"]
+      summary: Grupo de api's para consulta a caixa primaria.
+      description: Permite listar os nomes dos projetos.
+      responses:
+        200:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/ProjectNameResponse'
+        404:
+          description: "Erro ao encontrar informações"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro ao processar solicitação:
+                  value:
+                    message: "Nenhuma informação retornada pelo servidor."
+        500:
+          description: "Erro interno de servidor"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro interno de servidor:
+                  value:
+                    message: "Erro interno de servidor, abrir um chamado no GLPI."
+                    
+  /cx/v1/service/primary-box/list-host-names:
+    get:
+      tags: ["primary-box"]
+      summary: Grupo de api's para consulta a caixa primaria.
+      description: Permite listar os nomes dos hosts.
+      responses:
+        200:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/ProjectNameResponse'
+        404:
+          description: "Erro ao encontrar informações"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro ao processar solicitação:
+                  value:
+                    message: "Nenhuma informação retornada pelo servidor."
+        500:
+          description: "Erro interno de servidor"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro interno de servidor:
+                  value:
+                    message: "Erro interno de servidor, abrir um chamado no GLPI."
+                    
+  /cx/v1/service/primary-box/info:
+    get:
+      tags: ["primary-box"]
+      summary: Grupo de api's para consulta a caixa primaria.
+      description: Retorna informações da estrutura da caixa primária.
+      parameters:
+        - name: project
+          in: query
+          required: true
+          schema: 
+            type: string
+        - name: host_name
+          in: query
+          required: true
+          schema: 
+            type: string
+      responses:
+        200:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/PrimaryBoxInfoExternalResponse'
+        404:
+          description: "Erro ao encontrar informações"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro ao processar solicitação:
+                  value:
+                    message: "Nenhuma informação retornada pelo servidor."
+        500:
+          description: "Erro interno de servidor"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro interno de servidor:
+                  value:
+                    message: "Erro interno de servidor, abrir um chamado no GLPI."
+                    
+  /cx/v1/service/primary-box/general-status:
+    get:
+      tags: ["primary-box"]
+      summary: Grupo de api's para consulta a caixa primaria.
+      description: Retorna status geral da caixa primaria.
+      parameters:
+        - name: project
+          in: query
+          required: true
+          schema: 
+            type: string
+        - name: host_name
+          in: query
+          required: true
+          schema: 
+            type: string
+        - name: slot
+          in: query
+          required: true
+          schema: 
+            type: integer
+        - name: olt
+          in: query
+          required: true
+          schema: 
+            type: integer
+      responses:
+        200:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/PrimaryBoxGeneralStatus'
+        404:
+          description: "Erro ao encontrar informações"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro ao processar solicitação:
+                  value:
+                    message: "Nenhuma informação retornada pelo servidor."
+        500:
+          description: "Erro interno de servidor"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro interno de servidor:
+                  value:
+                    message: "Erro interno de servidor, abrir um chamado no GLPI."
+                    
+  /cx/v1/service/primary-box/occupation:
+    get:
+      tags: ["primary-box"]
+      summary: Grupo de api's para consulta a caixa primaria.
+      description: Retorna ocupação da caixa primaria.
+      parameters:
+        - name: number_box
+          in: query
+          required: true
+          schema: 
+            type: integer
+        - name: group_id
+          in: query
+          required: true
+          schema: 
+            type: integer
+      responses:
+        200:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/PrimaryBoxOccupation'
+        404:
+          description: "Erro ao encontrar informações"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro ao processar solicitação:
+                  value:
+                    message: "Nenhuma informação retornada pelo servidor."
+        500:
+          description: "Erro interno de servidor"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+              examples:
+                Erro interno de servidor:
+                  value:
+                    message: "Erro interno de servidor, abrir um chamado no GLPI."
+                
+components:
+  schemas:
+    MassiveHttpResponseModel:
+      title: ResponseList
+      type: array
+      items:
+        $ref: "#/components/schemas/MassiveResponseItem"
+    MassiveResponseItem:
+      title: ResponseItem
+      type: object
+      properties:
+        user_id:
+          type: integer
+          description: Número do contrato do cliente
+          example: 820391
+        type:
+          type: string
+          description: Tipo da massiva aberta
+          example: 'Incidente'
+        start_date:
+          type: string
+          description: Timestamp do inicio da massiva
+          example: "2022-10-17 00:00:00"
+        end_date:
+          type: string
+          description: Timestamp do fim estimado da massiva
+          example: '2022-10-19 12:00:00'  
+  
+    PasswordWifiRequestDTO:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          description: "ID do cliente"
+          example: 1234567
+        document:
+          type: string
+          description: "Número do CPF do cliente"
+          example: "12345678945"
+        plan_login:
+          type: string
+          description: Login do plano do usuário
+          example: 123456.1@desktop.com.br
+        wifi_password:
+          type: string
+          description: Senha com 8 a 16 dígitos, entre letras e números, sem caracteres especiais. 
+          example: 'ABC123456'
+        plan_category:
+          type: string
+          description: Categoria do plano
+          example: D
+
+    ExternalConsumptionStatusResponse:
+      type: object
+      title: ResponseItem
+      properties:
+        plan:
+          type: string
+          example: 300M
+        moment_connected:
+          type: string
+          example: 2023-03-27T21:55:59
+        status:
+          type: string
+          enum:
+            - CONECTADO
+            - BLOQUEADO
+            - DESCONECTADO
+          example: CONECTADO
+        current:
+          type: object
+          properties:
+            user_uploadGbs:
+              type: number
+              format: double
+              example: 1.2
+            user_downloadGbs:
+              type: number
+              format: double
+              example: 1.5
+        last:
+         type: object
+         properties:
+            differences_month_upload:
+                  type: integer
+                  format: int64
+                  example: 25
+            differences_month_download:
+                  type: integer
+                  format: int64
+                  example: 10
+    InvalidLoginError:
+      type: "object"
+      properties:
+        message:
+          type: "string"
+          example: "Login inválido"
+    MissingFieldsError:
+      type: "object"
+      properties:
+        message:
+          type: "string"
+          example: "Campos obrigatórios estão faltando."
+    NumberUserInvalid:
+      type: "object"
+      properties:
+        message:
+          type: "string"
+          example: "Número de usuário inválido"
+          
+    UnlockPlanDto:
+      type: object
+      properties:
+        document:
+          type: string
+          description: Número do CPF do cliente
+          example: 03466578012
+        customer_id:
+          type: integer
+          format: int64
+          description: Número do usuário
+          example: 123456
+
+    ResetRequest:
+      type: object
+      properties:
+        document:
+          type: string
+          description: CPF do cliente
+          example: '14235647890'
+        login:
+          type: string
+          description: Login do cliente
+          example: '731140.8@desktop.com.br'
+        customer_id:
+          type: integer
+          description: ID do cliente
+          example: 12345
+  
+    RebootRequest:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          description: "ID do cliente"
+          example: "1234567"
+        document:
+          type: string
+          description: "CPF do cliente"
+          example: "12345678945"
+        login:
+          type: string
+          description: "Email de login do cliente"
+          example: "731140.8@desktop.com.br"   
+  
+    UpdateEmailResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: "Mensagem de retorno"
+          
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          
+    LastTwelveBilletsResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 28871592
+        billet_number:
+          type: string
+          example: "2304563002"
+        value_charged:
+          type: number
+          example: 114.95
+        due_date:
+          type: string
+          example: "10/04/2023"
+        paid:
+          type: string
+          example: "Em aberto"
+        pay_day:
+          type: string
+          example: "10/04/2023"
+        bank:
+          type: string
+          example: "22"
+        pix_env_id:
+          type: string
+          example: "00020101021226900014br.gov.bcb.pix2568qrcodepix.bb.com.br/pix/v2/cobv/6600c55b-d16e-489f-a183-30809ebabe195204000053039865406114.955802BR5918DESKTOP - SIGMANET6006SUMARE62070503***630444F4"
+        billet_code:
+          type: string
+          example: "00190000090348967623304563002171793160000011495"
+        base_64_qrcode:
+          type: string
+          example: "SXNzbyDDqSB1bSBiYXNlIDY0IGVuY29kYWRv"
+          
+    UpdateCustomerInfoDTO:
+      type: object
+      properties:
+        customer_id:
+          type: number
+          example: 12
+        document:
+          type: string
+          example: "12345678910"
+        email:
+          type: object
+          properties:
+            email:
+              type: string
+              example: teste@teste.com.br, teste2@teste.com.br
+        phone:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneDTO'
+              
+    PhoneDTO:
+      type: object
+      properties:
+        new_phone:
+          type: string
+          example: "(01)1234-1234"
+        old_phone:
+          type: string
+          example: "(12)7845-9653"
+    
+    AddressFeeExternalRequest:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          example: 1
+        document:
+          type: string
+          example: "12345678910"
+        amount_charged:
+          type: integer
+          example: 1
+          description: "Valor minimo = 1."
+        installments:
+          type: integer
+          example: 1
+          description: "Valores entre 1 e 6."
+          
+    TrafficResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        bras: 
+          type: array
+          items:
+            $ref: '#/components/schemas/TrafficInfo'
+            
+    TrafficInfo:
+      type: object
+      properties:
+        input:
+          type: number
+          example: 1.1
+        output:
+          type: number
+          example: 1.1
+        ping:
+          type: string
+          example: '1.31'
+        
+    ConnectionResponse:
+      type: object
+      properties:
+        ipAddress:
+          type: string
+        macAddress:
+          type: string
+        nasAddress:
+          type: string
+        startTime:
+          type: string
+          example: '2023-06-18 15:05:46'
+        stopTime: 
+          type: string
+          example: '2023-06-18 15:05:46'
+        terminateCause: 
+          type: string
+        received:
+          type: integer
+        sent: 
+          type: integer
+        logs:
+          type: array
+          items:
+            $ref: '#/components/schemas/LogsConnection'
+            
+    LogsConnection:
+      type: object
+      properties:
+        ipAddress:
+          type: string
+        macAddress:
+          type: string
+        nasAddress:
+          type: string
+        startTime:
+          type: string
+          example: '2023-06-18 15:05:46'
+        stopTime: 
+          type: string
+          example: '2023-06-18 15:05:46'
+        terminateCause: 
+          type: string
+        received:
+          type: integer
+        sent: 
+          type: integer
+          
+    ConnectionStatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        adm:
+          $ref: '#/components/schemas/Adm'
+              
+    Adm:
+      type: object
+      properties:
+        num:
+          type: integer
+        plano_id:
+          type: integer
+        plano:
+          type: string
+        posicao_gpon:
+          type: integer
+        categoria:
+          type: string
+        plano_ip:
+          type: string
+        plano_status:
+          type: string
+        ip:
+          type: string
+        hostname:
+          type: string
+        plano_descricao:
+          type: string
+        plano_limite:
+          type: string
+        rate_limit:
+          type: integer
+        slot:
+          type: integer
+        olt:
+          type: integer
+        onu_port:
+          type: integer
+        primaria:
+          type: integer
+        primaria_id:
+          type: integer
+        cto:
+          type: integer
+        fsan:
+          type: string
+        onu_model:
+          type: string
+        nome:
+          type: string
+        pppoe_user:
+          type: string
+        pppoe_password:
+          type: string
+        mac1:
+          type: string
+        mac2:
+          type: string
+        mac3:
+          type: string
+        ssid:
+          type: string
+        wifi_password:
+          type: string
+        phone_number:
+          type: string
+        roteador_adicional:
+          type: string
+        phone_password:
+          type: string
+        sip_server:
+          type: integer
+        phone_number_line2:
+          type: string
+        phone_password_line2:
+          type: string
+        sip_server_line2:
+          type: string
+        video:
+          type: string
+        mac_ativo:
+          type: string
+        serial_ativo:
+          type: string
+        
+    BoxStatusResponse:
+      type: object
+      properties:
+        numero:
+          type: integer
+        nome:
+          type: string
+        porta:
+          type: integer
+        caixa:
+          type: integer
+        plano:
+          type: string
+        pppoe:
+          type: string
+        idPlanoUsuario:
+          type: integer
+        ipDslam:
+          type: string
+        slot:
+          type: integer
+        fsan:
+          type: string
+        olt:
+          type: integer
+        numeroPrimaria:
+          type: integer
+        dslam:
+          type: string
+        connected:
+          type: boolean
+        signal:
+          type: string
+        
+    BridgeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        olts:
+          $ref: '#/components/schemas/Olts'
+        acs:
+          $ref: '#/components/schemas/AcsGeneral'
+          
+    AcsGeneral:
+      type: object
+      properties:
+        status:
+          type: string
+        acs:
+          $ref: '#/components/schemas/Acs'
+          
+    Acs:
+      type: object
+      properties:
+        status:
+          type: string
+        eth1:
+          $ref: '#/components/schemas/EthernetOne'
+        eth2:
+          $ref: '#/components/schemas/EthernetTwo'
+        eth3:
+          $ref: '#/components/schemas/EthernetThree'
+        eth4:
+          $ref: '#/components/schemas/EthernetFour'
+          
+    EthernetOne:
+      type: object
+      properties:
+        status:
+          type: string
+        max_bit_rate:
+          type: string
+          
+    EthernetTwo:
+      type: object
+      properties:
+        status:
+          type: string
+        max_bit_rate:
+          type: string
+          
+    EthernetThree:
+      type: object
+      properties:
+        status:
+          type: string
+        max_bit_rate:
+          type: string
+          
+    EthernetFour:
+      type: object
+      properties:
+        status:
+          type: string
+        max_bit_rate:
+          type: string
+          
+    Olts:
+      type: object
+      properties:
+        slot:
+          type: string
+        olt:
+          type: string
+        gpon_port:
+          type: string
+        vlan_id:
+          type: string
+        macs:
+          type: array
+          items:
+            type: string
+        ips:
+          type: array
+          items:
+            type: string
+  
+    GponGeneralResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/GponOnuStatusResponse'
+        info:
+          $ref: '#/components/schemas/GponOnuInfoResponse'
+        radius:
+          $ref: '#/components/schemas/GponRadiusResponse'
+        
+    GponOnuStatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        olts:
+          $ref: '#/components/schemas/OltsOnuStatus'
+        
+    OltsOnuStatus:
+      type: object
+      properties:
+        onu_olt_rx:
+          type: string
+        onu_onu_rx:
+          type: string
+        onu_dist:
+          type: string
+        onu_oper:
+          type: string
+        onu_down:
+          type: string
+        onu_conf:
+          type: string
+        onu_status:
+          type: string
+          
+    GponOnuInfoResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        olts: 
+          $ref: '#/components/schemas/OltsOnuInfo'
+        
+    OltsOnuInfo:
+      type: object
+      properties:
+        serialnovendorspecifichex:
+          type: string
+        cpe_model:
+          type: string
+        cpeimageversionactive:
+          type: string
+        cpeimageversionstandby:
+          type: string
+        homologatedversion:
+          type: string
+          
+    GponRadiusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        radius:
+          $ref: '#/components/schemas/GponRadius'
+          
+    GponRadius:
+      type: object
+      properties:
+        radacctid:
+          type: integer
+        acctsessionid:
+          type: string
+        acctuniqueid:
+          type: string
+        username:
+          type: string
+        groupname:
+          type: string
+        realm:
+          type: string
+        nasipaddress:
+          type: string
+        nasportid:
+          type: string
+        nasporttype:
+          type: string
+        acctstarttime:
+          type: string
+          example: '2023-06-10 17:08:59'
+        acctstoptime:
+          type: string
+          example: '2023-06-10 17:08:59'
+        acctsessiontime:
+          type: integer
+        acctauthentic:
+          type: integer
+        connectinfo_start:
+          type: string
+        connectinfo_stop:
+          type: string
+        acctinputoctets:
+          type: integer
+        acctoutputoctets:
+          type: integer
+        calledstationid:
+          type: string
+        callingstationid:
+          type: string
+        acctterminatecause:
+          type: string
+        servicetype:
+          type: string
+        framedprotocol:
+          type: string
+        framedipaddress:
+          type: string
+        acctstartdelay:
+          type: integer
+        acctstopdelay:
+          type: integer
+        xascendsessionsvrkey:
+          type: string
+        framedipv6prefix:
+          type: string
+        delegatedipv6prefix:
+          type: string
+          
+    ConnectionInfoResponse:
+      type: object
+      properties:
+        result_onu:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConnectionInfo'
+        result_router:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConnectionInfo'  
+            
+    ConnectionInfo:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+          
+    LastLogsresponse:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: "2023-07-06T14:14:24.107961"
+        user:
+          type: string
+        domain:
+          type: string
+        message:
+          type: string
+        mac:
+          type: string
+          
+    NetworkConsumptionResponse:
+      type: object
+      properties:
+        limit:
+          type: integer
+        utilized:
+          type: integer
+        extra:
+          type: integer
+        available:
+          type: integer
+    
+    OpenBilletsResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 28871592
+        billet_number:
+          type: string
+          example: "2304563002"
+        value_charged:
+          type: number
+          example: 114.95
+        due_date:
+          type: string
+          example: "10/04/2023"
+        paid:
+          type: string
+          example: "Em aberto"
+        pay_day:
+          type: string
+          example: "10/04/2023"
+        bank:
+          type: string
+          example: "22"
+        pix_emv_id:
+          type: string
+          example: "00020101021226900014br.gov.bcb.pix2568qrcodepix.bb.com.br/pix/v2/cobv/6600c55b-d16e-489f-a183-30809ebabe195204000053039865406114.955802BR5918DESKTOP - SIGMANET6006SUMARE62070503***630444F4"
+        billet_code:
+          type: string
+          example: "00190000090348967623304563002171793160000011495"
+        pdf_download_url:
+          type: string
+          example: "https://api.dev.desktop.com.br/custumerService/api/v3/customer/service/charge/billet/Umlrb1JrcEFLU3BLWkRBNE1qTXBLRUFqVlVVb0tVUkZVMHRVVDFBeE9UazVUV3BOZDA1RWEzcE9la1UwVGtFOVBRPT0=.pdf"
+        base_64_qrcode:
+          type: string
+          example: "SXNzbyDDqSB1bSBiYXNlIDY0IGVuY29kYWRv"   
+          
+    ListDueDateResponse:
+      type: object
+      properties:
+        due_dates_available:
+          type: array
+          items: 
+            type: integer
+        current_billet_due_date:
+          type: integer    
+          
+    ExternalPhoneRequest:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          example: 6
+        new_phone_number:
+          type: string
+          example: 11996587912 / 1133379999
+          
+    ExternalServiceHistory:
+      type: object
+      properties:
+        type:
+          type: string
+        date:
+          type: string
+          example: 01/01/2024
+        description:
+          type: string
+        employee:
+          type: string
+        service_id:
+          type: integer
+          example: 999999
+          
+    ClientFeeResponse:
+      type: object
+      properties:
+        fine:
+          type: integer
+          example: 1.10
+        fees:
+          type: integer
+          example: 1.10
+        amount: 
+          type: integer
+          example: 110.55
+          
+    MassiveIncidentResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/MassiveIncidentDataResponse'
+            
+    MassiveIncidentDataResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+        registerDate:
+          type: string
+          example: 31-12-2023 04:30:53
+        estimatedEnd:
+          type: string
+          example: 31-12-2023 04:30:53
+        finishDate:
+          type: string
+          example: 31-12-2023 04:30:53
+        statusDescription:
+          type: string
+        typeDescription:
+          type: string
+        infraGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/MassiveIncidentInfraGroupsResponse'
+        estimatedStart:
+          type: string
+          example: 31-12-2023 04:30:53
+        objective:
+          type: string
+        creatorName:
+          type: string
+        creatorDepartment:
+          type: string
+        closedByName:
+          type: string
+        closedByDepartment:
+          type: string
+        reason:
+          type: string
+        solution:
+          type: string
+        massiveType:
+          type: string
+        totalAffectedCustomers:
+          type: string
+      
+    MassiveIncidentInfraGroupsResponse:
+      type: object
+      properties:
+        hostDescription:
+          type: string
+        projectDescription:
+          type: string
+        infras:
+          type: array
+          items:
+            $ref: '#/components/schemas/MassiveIncidentInfrasResponse'
+            
+    MassiveIncidentInfrasResponse:
+      type: object
+      properties:
+        id: 
+          type: string
+        infraId:
+          type: integer
+        infraDescription:
+          type: string
+        hostDescription:
+          type: string
+        projectDescription:
+          type: string
+          
+    ProjectNameResponse:
+      type: object
+      properties:
+        adm:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectNameAdmResponse'
+            
+    ProjectNameAdmResponse:
+      type: object
+      properties:
+        descricao:
+          type: string
+        descricao_1:
+          type: string
+          
+    PrimaryBoxInfoExternalResponse:
+      type: object
+      properties:
+        slot:
+          type: integer
+        olt:
+          type: integer
+        gpon_porta_id:
+          type: integer
+        group_id:
+          type: integer
+        primary_number:
+          type: integer
+        qnt_ctos:
+          type: integer
+        
+    PrimaryBoxGeneralStatus:
+      type: object
+      properties:
+        primary_number:
+          type: integer
+        user_connection:
+          type: string
+        percentage:
+          type: integer
+        adm:
+          type: array
+          items: 
+            $ref: '#/components/schemas/PrimaryBoxAdm' 
+            
+    PrimaryBoxAdm:
+      type: object
+      properties:
+        pppoes:
+          type: array
+          items: 
+            type: string
+        occupation: 
+          type: string
+        number_box:
+          type: string
+        connected_clients:
+          type: string
+          
+    PrimaryBoxOccupation:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          pppoe:
+            type: string
+          plan:
+            type: string
+          port:
+            type: integer
+          connection:
+            type: string
+          signal:
+            type: string
+          number_box:
+            type: integer

@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
-  name: admin-db
+  name: boleto-mongodb-db
   description: Banco de dados Principal da Organização
 spec:
   type: database
