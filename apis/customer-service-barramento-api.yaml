@@ -1,21 +1,21 @@
-apiVersion: backstage.iov1alpha1
+apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: barramento-service 
-  description: Api responsável pela integração Salesforce
+  name: petstore
+  description: The petstore API
   tags:
     - store
     - rest
   links:
-    - url: httpsgithub.comswagger-apiswagger-petstore
+    - url: https://github.com/swagger-api/swagger-petstore
       title: GitHub Repo
       icon: github
-    - url: httpsgithub.comswagger-apiswagger-petstoreblobmastersrcmainresourcesopenapi.yaml
+    - url: https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml
       title: API Spec
       icon: code
 spec:
   type: openapi
-  lifecycle: production
-  owner: team-deskforce
+  lifecycle: experimental
+  owner: team-c
   definition:
-    $text: .barramento-service-api-swagger.yaml
+    $text: ./petstore.oas.yaml
