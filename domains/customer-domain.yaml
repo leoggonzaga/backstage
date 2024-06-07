@@ -4,5 +4,5 @@ metadata:
   name: customer
   description: Domínio resposável pelo processo de gerenciamento e execução de pedidos feitos pelos clientes em relação a produtos ou serviços
 spec:
-  owner: team-customer
+  owner: desktop-corp
 

@@ -1,8 +1,0 @@
-apiVersion: backstage.io/v1alpha1
-kind: Domain
-metadata:
-  name: customer
-  description: Domínio resposável pela ativação do cliente.
-spec:
-  owner: team-customer
-
