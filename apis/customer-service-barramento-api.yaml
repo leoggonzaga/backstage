@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: barramento-service-api
-links:
+  links:
   - url: https://desktop.atlassian.net/wiki/spaces/SS/pages/137396225/Documenta+o+Barramento+-+Service
     title: Confluence
     icon: code
