@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: service-inventory
+  description: Relaciona e sincroniza os itens do catálogo de recursos com os serviços aos quais estão associados
+  tags:
+    - service
+spec:
+  domain: service
+  owner: desktop-corp
+  

@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: customer-collection
+  description: Identificação, monitoramento, resolução de valores devidos pelos clientes, aplicação de políticas de cobrança, acompanhar prazos de pagamento e registro das interações. Definição e aplicação de penalidades em casos de violações contratuais ou atrasos nos pagamentos
+  tags:
+    - portal
+spec:
+  domain: customer
+  owner: desktop-corp
+  

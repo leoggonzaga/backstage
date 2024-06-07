@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: enterprise-hr
+  description: Gestão das capacidades sistemicas para Recursos Humanos
+  tags:
+    - portal
+spec:
+  domain: enterprise
+  owner: desktop-corp
+  

@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: resource-appointment
+  description: Relacionado ao ERP empresarial, contas a receber, contas a pagar, etc.
+  tags:
+    - resource
+spec:
+  domain: resource
+  owner: desktop-corp
+  

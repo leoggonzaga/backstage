@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: customer-information
+  description: Dados Clientes, inventário, contratos, parque, ativos, etc.
+  tags:
+    - portal
+spec:
+  domain: customer
+  owner: desktop-corp
+  

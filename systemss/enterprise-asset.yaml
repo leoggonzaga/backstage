@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: enterprise-asset
+  description: Gestão dos Ativos da organização
+  tags:
+    - enterprise
+spec:
+  domain: enterprise
+  owner: desktop-corp
+  

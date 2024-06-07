@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: resource-problem
+  description: Diagnostica problemas e falhas nos serviços prestados. Resolve os problemas identificados nos serviços
+  tags:
+    - resource
+spec:
+  domain: resource
+  owner: desktop-corp
+  

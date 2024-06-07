@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: resource-location
+  description: Gerencia informações sobre a localização e disponibilidade dos recursos
+  tags:
+    - resource
+spec:
+  domain: resource
+  owner: desktop-corp
+  

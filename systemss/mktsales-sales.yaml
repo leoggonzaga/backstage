@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: mktsales-sales
+  description: Avaliação e análise de oportunidades de vendas, determinar sua viabilidade. Desenvolver uma proposta de venda que responda às necessidades do cliente. Envolve todo o processo de negociação até a assinatura de contrato. Identificar quando as ofertas atuais podem não ser mais apropriadas ou quando surge a oportunidade para uma venda maior
+  tags:
+    - mktsales
+spec:
+  domain: mktsales
+  owner: desktop-corp
+  

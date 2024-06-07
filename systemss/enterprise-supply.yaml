@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: enterprise-supply
+  description: Gestão da cadeia de suprimentos, compras, logística, transporte.
+  tags:
+    - enterprise
+spec:
+  domain: enterprise
+  owner: desktop-corp
+  

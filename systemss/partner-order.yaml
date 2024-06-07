@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: partner-order
+  description: Gerencia e processa pedidos feitos pelos parceiros
+  tags:
+    - partner
+spec:
+  domain: partner
+  owner: desktop-corp
+  

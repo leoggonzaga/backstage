@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: customer-relationship
+  description: Gerencia o ciclo de vida do cliente 
+  tags:
+    - customer
+spec:
+  domain: customer
+  owner: desktop-corp
+  

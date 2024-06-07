@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: enterprise-compliance
+  description: Gestão das atividades regulatórias, jurídicas e de compliance
+  tags:
+    - enterprise
+spec:
+  domain: enterprise
+  owner: desktop-corp
+  

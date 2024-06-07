@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: resource-test
+  description: Conduz os testes dos recursos
+  tags:
+    - resource
+spec:
+  domain: resource
+  owner: desktop-corp
+  

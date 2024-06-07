@@ -4,8 +4,7 @@ metadata:
   name: desktop-systems
   description: A collection of all systems
 spec:
-  targets:    
-    - ./systems/desktop-resource-field-appoiment.yaml
+  targets:        
     - ./systems/customer-bill.yaml
     - ./systems/customer-collection.yaml
     - ./systems/customer-experience.yaml
@@ -15,11 +14,6 @@ spec:
     - ./systems/customer-payment.yaml
     - ./systems/customer-problem.yaml
     - ./systems/customer-relationship.yaml
-    - ./systems/desktop-custsomer-bill.yaml
-    - ./systems/desktop-custsomer-payment.yaml
-    - ./systems/desktop-resource-field-appoiment.yaml
-    - ./systems/desktop-resource-workforce.yaml
-    - ./systems/desktop-service-problem.yaml
     - ./systems/enterprise-asset.yaml
     - ./systems/enterprise-compliance.yaml
     - ./systems/enterprise-finance.yaml

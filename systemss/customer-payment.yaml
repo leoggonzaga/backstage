@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: customer-payment
+  description: Configuração e administração de métodos de pagamento como cartões de crédito, débito, transferências bancárias, e-wallets, entre outros
+  tags:
+    - customer
+spec:
+  domain: customer
+  owner: desktop-corp
+  

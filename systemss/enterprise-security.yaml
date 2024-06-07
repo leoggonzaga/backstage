@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: enterprise-security
+  description: Gestão de segurança e risco empresarial
+  tags:
+    - portal
+spec:
+  domain: enterprise
+  owner: desktop-corp
+  

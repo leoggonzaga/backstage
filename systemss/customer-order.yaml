@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: customer-order
+  description: Trata do processo de gerenciamento e execução de pedidos feitos pelos clientes em relação a produtos ou serviços
+  tags:
+    - customer
+spec:
+  domain: customer
+  owner: desktop-corp
+  

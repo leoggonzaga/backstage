@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: customer-experience
+  description: Mapeamento e análise da jornada do cliente ao longo de todas as interações com a empresa
+  tags:
+    - portal
+spec:
+  domain: customer
+  owner: desktop-corp
+  

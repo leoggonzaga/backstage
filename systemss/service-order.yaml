@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: service-order
+  description: Orquestra e gerencia pedidos de ativação de serviços
+  tags:
+    - service
+spec:
+  domain: service
+  owner: desktop-corp
+  

@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: mktsales-loyalty
+  description: Define todos os aspectos de um programa de fidelidade, como requisitos, o nome e os objetivos do programa de fidelidade. Aspectos operacionais da execução de um programa de fidelidade
+  tags:
+    - mktsales
+spec:
+  domain: mktsales
+  owner: desktop-corp
+  
