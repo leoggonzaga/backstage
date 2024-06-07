@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: inventory
+  name: partner-inventory
   description: Lida com operações como acesso, inventário e configuração dos catálogos de parceiros
   tags:
-    - portal
+    - partner
 spec:
   domain: partner
   owner: desktop-corp

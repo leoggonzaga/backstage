@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: communication
+  name: mktsales-communication
   description: Ciclo de vida das estratégias de comunicação de marketing como criação, desenvolvimento, garantias, modificação e finalização. Gerencia e coordena a entrega das comunicações aos canais selecionados. Estabelece, monitora  e analisa métricas para avaliar a eficácia de uma comunicação de marketing
   tags:
-    - portal
+    - mktsales
 spec:
   domain: mktsales
   owner: desktop-corp

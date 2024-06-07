@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: problem
+  name: customer-problem
   description: Suporte e assistência (atendimento, resolução de problemas) prestados aos clientes durante toda a jornada
   tags:
-    - portal
+    - customer
 spec:
   domain: customer
   owner: desktop-corp

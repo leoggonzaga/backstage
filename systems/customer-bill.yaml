@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: bill
+  name: customer-bill
   description: Criação e manutenção de registros de contas, aplicação de encargos e descontos, geração de faturas, acompanhamento de pagamentos e saldos pendentes
   tags:
-    - portal
+    - customer
 spec:
   domain: customer
   owner: desktop-corp

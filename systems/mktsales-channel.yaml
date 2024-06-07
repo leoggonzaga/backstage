@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: channel
+  name: mktsales-channel
   description: Gerenciamento e operação de canais Internos e Externos
   tags:
-    - portal
+    - mktsales
 spec:
   domain: mktsales
   owner: desktop-corp

@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: workforce
+  name: resource-workforce
   description: Setup de Áreas, Sites, Time de Campo (Staff), Habilidades, Areas de Atuação, etc.
   tags:
-    - portal
+    - resource
 spec:
   domain: resource
   owner: desktop-corp

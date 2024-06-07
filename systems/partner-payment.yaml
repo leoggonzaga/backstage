@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: payment
+  name: partner-payment
   description: Controle e acompanhamento dos pagamentos de/para Parceiros
   tags:
-    - portal
+    - partner
 spec:
   domain: partner
   owner: desktop-corp

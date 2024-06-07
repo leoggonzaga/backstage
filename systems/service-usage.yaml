@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: usage
+  name: service-usage
   description: Gerencia e controla o uso dos serviços pelos clientes
   tags:
-    - portal
+    - service
 specs:
   domain: service
   owner: desktop-corp

@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: test
+  name: service-test
   description: Conduz os testes dos serviços. Gera relatórios sobre os resultados dos testes realizados nos serviçosConduz os testes dos serviços. Gera relatórios sobre os resultados dos testes realizados nos serviços
   tags:
-    - portal
+    - service
 spec:
   domain: service
   owner: desktop-corp

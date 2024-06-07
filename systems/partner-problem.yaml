@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: problem
+  name: partner-problem
   description: Diagnostica problemas e falhas nas interações com parceiros
   tags:
-    - portal
+    - partner
 spec:
   domain: partner
   owner: desktop-corp

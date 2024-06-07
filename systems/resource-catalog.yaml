@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: catalog
+  name: resource-catalog
   description: Gerencia a especificação, ciclo de vida, desenvolvimento, implantação e testes dos recursos disponíveis. Lida com operações como acesso, inventário e configuração dos recursos catalogados
   tags:
-    - portal
+    - resource
 spec:
   domain: resource
   owner: desktop-corp

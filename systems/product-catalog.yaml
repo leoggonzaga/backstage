@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: catalog
+  name: product-catalog
   description: Especificação, Ciclo de vida, Desenvolvimento, Políticas e Testes de produtos e ofertas. Precificação, Compatibilidade, Elegibilidade, Comercialização, Fidelidade de produtos e ofertas
   tags:
-    - portal
+    - product
 spec:
   domain: product
   owner: desktop-corp

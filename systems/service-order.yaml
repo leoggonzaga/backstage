@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: order
+  name: service-order
   description: Orquestra e gerencia pedidos de ativação de serviços
   tags:
-    - portal
+    - service
 spec:
   domain: service
   owner: desktop-corp

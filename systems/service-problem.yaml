@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: problem
+  name: service-problem
   description: Diagnostica problemas e falhas nos serviços prestados. Resolve os problemas identificados nos serviços
   tags:
-    - portal
+    - service
 spec:
   domain: service
   owner: desktop-corp

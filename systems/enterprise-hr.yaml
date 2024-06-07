@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: hr
+  name: enterprise-hr
   description: Gestão das capacidades sistemicas para Recursos Humanos
   tags:
     - portal
