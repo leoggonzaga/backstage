@@ -13,4 +13,3 @@ spec:
   system: interaction
   definition:
     $text: ./barramento-field-swagger.yaml
-
