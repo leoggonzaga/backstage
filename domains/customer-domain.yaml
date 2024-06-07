@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Domain
 metadata:
-  name: customer-domain
+  name: customer
   description: Domínio resposável pelo processo de gerenciamento e execução de pedidos feitos pelos clientes em relação a produtos ou serviços
 spec:
   owner: team-customer
