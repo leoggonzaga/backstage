@@ -13,5 +13,3 @@ spec:
   system: interaction
   definition:
     $text: ./barramento-service-api-swagger.yaml
-    
-
