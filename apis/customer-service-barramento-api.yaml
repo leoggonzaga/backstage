@@ -10,7 +10,7 @@ spec:
   type: openapi
   lifecycle: experimental
   owner: team-deskforce
-  system: interaction
+  system: customer-interaction
   definition:
     $text: ./barramento-service-api-swagger.yaml
 
