@@ -1,0 +1,50 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: desktop-systems
+  description: A collection of all systems
+spec:
+  targets:        
+    - ./systems/customer-bill.yaml
+    - ./systems/customer-collection.yaml
+    - ./systems/customer-experience.yaml
+    - ./systems/customer-information.yaml
+    - ./systems/customer-interaction.yaml
+    - ./systems/customer-order.yaml
+    - ./systems/customer-payment.yaml
+    - ./systems/customer-problem.yaml
+    - ./systems/customer-relationship.yaml
+    - ./systems/enterprise-asset.yaml
+    - ./systems/enterprise-compliance.yaml
+    - ./systems/enterprise-finance.yaml
+    - ./systems/enterprise-fraud.yaml
+    - ./systems/enterprise-hr.yaml
+    - ./systems/enterprise-security.yaml
+    - ./systems/enterprise-supply.yaml
+    - ./systems/mktsales-campaign.yaml
+    - ./systems/mktsales-channel.yaml
+    - ./systems/mktsales-communication.yaml
+    - ./systems/mktsales-Loyalty.yaml
+    - ./systems/mktsales-sales.yaml
+    - ./systems/partner-bill.yaml
+    - ./systems/partner-catalog.yaml
+    - ./systems/partner-collection.yaml
+    - ./systems/partner-inventory.yaml
+    - ./systems/partner-order.yaml
+    - ./systems/partner-payment.yaml
+    - ./systems/partner-problem.yaml
+    - ./systems/partner-relationship.yaml
+    - ./systems/product-catalog.yaml
+    - ./systems/resource-catalog.yaml
+    - ./systems/resource-inventory.yaml
+    - ./systems/resource-location.yaml
+    - ./systems/resource-order.yaml
+    - ./systems/resource-Problem.yaml
+    - ./systems/resource-test.yaml
+    - ./systems/resource-usage.yaml
+    - ./systems/resource-workforce.yaml
+    - ./systems/service-inventory.yaml
+    - ./systems/service-order.yaml
+    - ./systems/service-problem.yaml
+    - ./systems/service-test.yaml
+    - ./systems/service-usage.yaml
