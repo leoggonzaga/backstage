@@ -20,3 +20,18 @@ spec:
   dependsOn: ['resource:admin-db']
   consumesApis:
     - api:websvc-api
+  definition: |
+      openapi: "3.0.0"
+      info:
+        version: 1.0.0
+        title: resource-inventory-api
+        description: Api para listagem de inventário de recursos
+        license:
+          name: © 2021 DESKTOP INTERNET SERVICES | CNPJ 08.170.849/0001-15
+          url: http://www.desktop.com.br        
+      servers:
+        - url: http://api-v2.desktop.com.br/v1
+      paths:
+        /protocol:
+          get:
+            summary: Get olts
