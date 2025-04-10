@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: apis-payment
+  description: A collection of all Backstage example APIs
+spec:
+  targets:    
+    - ./apis/payment/bill-order.yaml
+    - ./apis/payment/customer-cancellation-api.yaml
+    - ./apis/payment/customer-finan.yaml
+    - ./apis/payment/customer-integration-api.yaml
+    - ./apis/payment/faturamento-api.yaml
+    - ./apis/payment/infra-api.yaml
+    - ./apis/payment/infra-tv-api.yaml
+    - ./apis/payment/payment-api.yaml
+    - ./apis/payment/pii-customer-api.yaml
+    - ./apis/payment/pii-financial-api.yaml
+    - ./apis/payment/sendmail-massivo-api.yaml
+    - ./apis/payment/sendsms-api.yaml

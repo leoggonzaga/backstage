@@ -1,0 +1,64 @@
+openapi: 3.0.3
+servers:
+  - url: https://api-sandbox.desktop.com.br
+    description: HML
+  - url: https://api-v2.desktop.com.br
+    description: PROD
+paths:
+  /api/qvd/v1/analyzes:
+    get:
+      tags:
+         - QVD Analyzes
+      operationId: get-qvd-analyzes
+      summary: Retorna o status do cliente em relação a contratos
+      parameters:
+         - in: body
+           name: id
+           schema:
+              $ref: '#/components/schemas/QVDRequest'
+           description: "Id do Contrato"
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QVDResponse'
+          description: OK
+        '404':
+          description: Not Found
+        '401':
+          description: invalid request
+
+components:
+  schemas:
+    QVDRequest:
+             properties:
+              cpf:
+                type: string
+              nome:
+                type: string
+              data_nascimento:
+                type: string
+              email:
+                type: string
+              tv:
+                type: string
+              cep:
+                type: string
+              ddd:
+                type: string
+              numero:
+                type: string
+              nome_mae:
+                type: string
+        
+    QVDResponse:
+            properties:
+              client:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  motivo:
+                    type: string
+                  

@@ -1,0 +1,255 @@
+openapi: 3.0.3
+servers:
+  - url: https://api.dev.desktop.com.br
+    description: HML
+  - url: https://api.desktop.com.br
+    description: PROD
+paths:
+  /api/v3/sales/seller/channel:
+    get:
+      tags:
+         - Canal Vendedor
+      operationId: saler-channel
+      summary: Consulta do canal do vendedor.
+      parameters:
+         - in: query
+           name: loginEmployee
+           schema:
+             type: string
+           description: "Login do Funcionário"
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CanalVendedor200'
+          description: OK
+        '404':
+          description: Not Found
+        '401':
+          description: invalid request
+  /api/v3/sales/authentication:
+    get:
+      tags:
+         - Login Front
+      operationId: login-front
+      summary: Rota de autenticação usada dentro do Front de Vendas.
+      parameters:
+         - in: query
+           name: user
+           schema:
+             type: string
+           description: "Login do Funcionário"
+         - in: query
+           name: password
+           schema:
+             type: string
+           description: "Senha do Funcionário"
+         - in: query
+           name: client_id 
+           schema:
+             type: string
+           description: ""
+         - in: query
+           name: client_secret 
+           schema:
+             type: string
+           description: ""
+      responses:
+        '200':
+          content:
+            json:
+              schema:
+                $ref: '#/components/schemas/LoginFront200'
+                
+          description: OK
+        '404':
+          description: Not Found
+        '401':
+          description: invalid token
+  /api/v1/client/user:
+    post:
+      tags:
+         - Verificação Parceiro
+      operationId: verify-partner
+      summary: Verificação do usuário que é usada pelos parceiros.
+      parameters:
+         - in: query
+           name: user
+           schema:
+             type: string
+           description: "Login do usuário"
+         - in: query
+           name: password
+           schema:
+             type: string
+           description: "Senha do usuário"
+      responses:
+        '200':
+          content:
+            json:
+              schema:
+                $ref: '#/components/schemas/VerificarParceiro200'
+                
+          description: OK
+        '404':
+          description: Not Found
+        '401':
+          description: invalid token
+  /api/v3/client/toolbox/subscribe/subscribeIdAqui/resource/resourceIdAqui/countryCode/countryCodeAqui/action/actionIdAqui/addressIp/ipAdressAqui:
+    get:
+      tags:
+         - Integração Toolbox
+      operationId: status-venda
+      summary: Rota de integração com o Toolbox.
+      parameters:
+         - in: query
+           name: resource
+           schema:
+             type: string
+           description: "Id do resource"
+         - in: query
+           name: subscribe  
+           schema:
+             type: string
+           description: "Id do subscribe"
+         - in: query
+           name: contryCode  
+           schema:
+             type: string
+           description: "País"
+         - in: query
+           name: ipAdress  
+           schema:
+             type: string
+           description: "Ip"
+      responses:
+        '200':
+          content:
+            json:
+              schema:
+                $ref: '#/components/schemas/IntegracaoToolbox200'
+                
+          description: OK
+        '404':
+          description: Not Found
+        '401':
+          description: invalid token
+  /api/v1/client/user/userId/resource/resourceId:
+    get:
+      tags:
+         - Integração NEO/COMICS
+      operationId: neo-comics
+      summary: Rota de integração dos parceiros NEO e COMICS.
+      parameters:
+         - in: query
+           name: userId
+           schema:
+             type: string
+           description: "Id do user"
+         - in: query
+           name: resourceId  
+           schema:
+             type: string
+           description: "Id do subscribe"
+      responses:
+        '200':
+          content:
+            json:
+              schema:
+                $ref: '#/components/schemas/IntegracaoNeoComics200'
+                
+          description: OK
+        '404':
+          description: Not Found
+        '401':
+          description: invalid token
+  /client/api/v1/client/search/getpositiongpon:
+    post:
+      tags:
+         - Localização
+      operationId: gpon-location
+      summary: Retorna as caixas mais próximas da localização do cliente.
+      parameters:
+         - in: body
+           name: ""
+           description: ''
+           schema:
+              $ref: '#/components/schemas/GponRequest200'
+      responses:
+        '200':
+          description: OK
+          content:
+            json:
+              schema:
+                $ref: '#/components/schemas/GponResponse200'
+        '404':
+          description: Not Found
+        '401':
+          description: invalid token
+components:
+  schemas:
+    CanalVendedor200:
+      properties:
+        success:
+          type: boolean
+        data:
+          type: string
+    LoginFront200:
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            user_id:
+              type: string
+            credit_Politics:
+              type: string
+            access_Token:
+              type: string
+            expires_in:
+              type: string
+            token_type:
+              type: string
+            scope:
+              type: string
+    VerificarParceiro200:
+      properties:
+        success:
+          type: boolean
+        data:
+          type: string
+    IntegracaoToolbox200:
+      properties:
+        success:
+          type: boolean
+        data:
+          type: string
+    IntegracaoNeoComics200:
+      properties:
+        success:
+          type: boolean
+        data:
+          type: string
+    GponRequest200:
+      properties:
+        Street:
+          type: string
+        Number:
+          type: string
+        City:
+          type: string
+    GponResponse200:
+      properties:
+        success:
+          type: boolean
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              posicaoGpon:
+                type: number
+                
+            

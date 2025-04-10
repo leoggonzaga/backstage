@@ -1,0 +1,25 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: qvd-api
+  description: Responsável por Analise de Credito. Sistemas Atendidos - Front Vendas,Parceiros(Ecom, chatbot)
+  annotations:
+    sonarqube.org/project-key: pump-station
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/SDF/pages/109412353/QVD+-+QUALIFICADORA+DE+VENDAS+-+DESKTOP
+    title: Confluence
+    icon: code
+  - url: https://bitbucket.org/desktop/desktop-qvd-api/src/main/
+    title: Repositório
+    icon: code
+  tags:
+    - porta:8855    
+    - credito    
+spec:
+  type: openapi
+  lifecycle: production  
+  owner: team-crm
+  system: legacy-crm
+  dependsOn: ['resource:admin-db']
+  definition:
+    $text: ./swaggers/qvd-api-swagger.yaml

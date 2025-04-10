@@ -1,0 +1,20 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: massive-api
+  description: Listagem de Massivas abertas para um cliente e  scheduling.
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/OSS2/pages/294158597/Scheduling+Massivas+Como+executar+as+aplica+es+C+em+ambiente+local
+    title: Confluence
+    icon: code
+  - url: https://bitbucket.org/desktop/massive/src/master/
+    title: Repositório
+    icon: code
+  tags:    
+    - c#
+spec:
+  type: openapi
+  lifecycle: production  
+  owner: team-oss
+  system: legacy-oss
+  dependsOn: ['resource:admin-db']

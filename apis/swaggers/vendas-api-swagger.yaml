@@ -1,0 +1,826 @@
+openapi: 3.0.3
+servers:
+  - url: https://api-sandbox.desktop.com.br
+    description: HML
+  - url: https://api-v2.desktop.com.br
+    description: PROD
+paths:
+  /api/v1/sales/{idContrato}:
+    get:
+      tags:
+         - ResumoVenda
+      operationId: get-resumo-venda
+      summary: Retorna o resumo da venda
+      parameters:
+         - in: path
+           name: idContrato
+           description: "Id do Contrato"
+           required: true
+           schema:
+            type: object
+            properties:
+              iContrato:
+                type: string
+           
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResumoVenda200'
+          description: OK
+        '404':
+          description: Not Found
+        '401':
+          description: invalid request
+  /api/v1/sales:
+    post:
+      tags:
+         - CommitarVendaEcom
+      operationId: commit-venda-ecom
+      summary: Responsável por fazer a venda pelo Ecommerce
+      parameters:
+         - in: body
+           name: initialDateForCheck
+           schema:
+              $ref: '#/components/schemas/CommitVendaEcomRequest'
+      responses:
+        '200':
+          content:
+            json:
+              schema:
+                $ref: '#/components/schemas/CommitVendaEcom200'
+                
+          description: OK
+        '404':
+          description: Not Found
+        '401':
+          description: invalid token
+  /api/v2/sales:
+    post:
+      tags:
+         - CommitarVendaFront
+      operationId: commit-venda-front
+      summary: Responsável por fazer a venda pelo Front
+      parameters:
+         - in: body
+           name: initialDateForCheck
+           schema:
+              $ref: '#/components/schemas/CommitVendaFrontRequest'
+      responses:
+        '200':
+          content:
+            json:
+              schema:
+                $ref: '#/components/schemas/CommitVendaEcom200'
+                
+          description: OK
+        '404':
+          description: Not Found
+        '401':
+          description: invalid token
+  /api/v2/sales/status:
+    get:
+      tags:
+         - StatusVenda
+      operationId: status-venda
+      summary: Retorna o status da venda
+      parameters:
+         - in: query
+           name: cpf
+           description: 'CPF do cliente'
+           schema:
+              $ref: '#/components/schemas/StatusRequest'
+      responses:
+        '200':
+          content:
+            json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+                
+          description: OK
+        '404':
+          description: Not Found
+        '401':
+          description: invalid token
+  /api/v1/sales/contactsDetails:
+    get:
+      tags:
+         - contactsDetails
+      operationId: contact-details
+      summary: Valida o número do usuário
+      parameters:
+         - in: query
+           name: phoneNumber
+           description: 'Número do usuário'
+           schema:
+              $ref: '#/components/schemas/ContactDetailsResquest'
+      responses:
+        '200':
+          content:
+            json:
+              schema:
+                $ref: '#/components/schemas/ContactDetailsResponse'
+                
+          description: OK
+        '404':
+          description: Not Found
+        '401':
+          description: invalid token
+  /api/v2/sales/generateCode:
+    post:
+      tags:
+         - SMS Code
+      operationId: generate-code
+      summary: Gera um novo número a ser enviado ao usuário por SMS.
+      parameters:
+         - in: body
+           name: ""
+           description: ''
+           schema:
+              $ref: '#/components/schemas/generateCode'
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+        '401':
+          description: invalid token
+  /api/v2/sales/verifyCode:
+    get:
+      tags:
+         - SMS Code
+      operationId: verify-code
+      summary: Verifica se o código é válido.
+      parameters:
+         - in: body
+           name: ""
+           description: ''
+           schema:
+              $ref: '#/components/schemas/verifyCode'
+      responses:
+        '200':
+          description: OK
+          content:
+            json:
+              schema:
+                $ref: '#/components/schemas/verifyCodeResponse'
+        '404':
+          description: Not Found
+        '401':
+          description: invalid token
+  /api/v2/sales/resendCode:
+    post:
+      tags:
+         - SMS Code
+      operationId: resend-code
+      summary: Reenvia o código sms para o cliente.
+      parameters:
+         - in: body
+           name: ""
+           description: ''
+           schema:
+              $ref: '#/components/schemas/resendCodeResquest'
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+        '401':
+          description: invalid token
+          
+  /api/v2/sales/updateStatusSms:
+    post:
+      tags:
+         - SMS Code
+      operationId: update-code
+      summary: Atualiza o status de um código sms no banco de dados.
+      parameters:
+         - in: body
+           name: ""
+           description: ''
+           schema:
+              $ref: '#/components/schemas/updateCodeResquest'
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+        '401':
+          description: invalid token
+
+components:
+  schemas:
+    updateCodeResquest:
+        properties:
+          phone:
+            type: string
+            example: "88988074002"
+            description: número de celular como string
+          idOportunity:
+            type: number
+            example: 12345678
+            description: id oportunidade como long
+          status:
+            type: string
+            example: "SMS_INVALIDO"
+            description: novo status do sms
+    resendCodeResquest:
+        properties:
+          phone:
+            type: string
+            example: "88988074002"
+            description: número de celular como string
+          idOportunity:
+            type: number
+            example: 12345678
+            description: id oportunidade como long
+    verifyCodeResponse:
+      properties:
+        isAValideCode:
+          type: boolean
+        isTimeExpired:
+          type: boolean
+          default: false
+        message:
+          type: string
+    verifyCode:
+      properties:
+        phone:
+          type: string
+        idOportunity:
+          type: integer
+        code:
+          type: string
+    generateCode:
+      properties:
+        phone:
+          type: string
+        idOportunity:
+          type: integer  
+        saleLogin:
+          type: string
+        status:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        city:
+          type: string
+        cpf:
+          type: string
+    ContactDetailsResquest:
+      properties:
+        phoneNumber:
+          type: string
+    ContactDetailsResponse:
+      properties:
+        existsPhoneNumber:
+          type: boolean
+    StatusResponse:
+      properties:
+        sale:
+          type: boolean
+        plans:
+          type: string
+        protocolo:
+          type: string
+        contract:
+          type: array
+          items:
+            type: integer
+        daysMax:
+          type: boolean
+        openDate:
+          type: string
+      
+    StatusRequest:
+      properties:
+        cpf:
+          type: string
+          
+    CommitVendaEcom200:
+                properties:
+                  userNumber:
+                    type: integer
+                    default: 12312415
+                  contractNumber:
+                    type: integer
+                    default: 1244321
+                  protocolNumber:
+                    type: integer
+                    default: 1420320
+                  createdAt:
+                    type: string
+                    default: "2023-04-06 11:48:13"
+                    description: formatado como Y-M-D H:M:S
+                  serviceOrderId:
+                    type: string
+                    default: "d1de0f4e-a26a-4ac5-911e-737b26fa68de"
+        
+    CommitVendaEcomRequest:
+            properties:
+              client:
+                type: object
+                properties:
+                  spc:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        default: 1
+                      text:
+                        type: string
+                        default: ""
+                  personalData:
+                    type: object
+                    properties:
+                      fullname:
+                        type: string
+                        default: "teste"
+                      email:
+                        type: string
+                        default: "teste@gmail.com"
+                      rg:
+                        type: string
+                        default: "121314141"  
+                      document:
+                        type: string
+                        default: "2324234"
+                      birthDate:
+                        type: string
+                        default: "1999-08-11"
+                      motherName:
+                        type: string
+                        default: "teste"
+              contract:
+                type: object
+                properties:
+                  address:
+                    type: object
+                    properties:
+                      billingCity:
+                        type: string
+                        default: "teste"
+                      billingState:
+                        type: string
+                        default: "teste"
+                      billingStreet:
+                        type: string
+                        default: "teste"
+                      billingDistrict:
+                        type: string
+                        default: "Jardim Rio Negro"
+                      billingPostalCode:
+                        type: string
+                        default: "11347445"
+                      billingHouseNumber:
+                        type: integer
+                        default: 13
+                      billingComplement:
+                        type: string
+                        default: ""
+                      installationCity:
+                        type: string
+                        default: ""
+                      installationStreet:
+                        type: string
+                        default: ""
+                      installationDistrict:
+                        type: string
+                        default: ""
+                      installationPostalCode:
+                        type: string
+                        default: ""
+                      installationHouseNumber:
+                        type: integer
+                        default: ""
+                      installationComplement:
+                        type: integer
+                        default: ""
+                      country:
+                        type: string
+                        default: "BRASIL"
+                  installationInfo:
+                    type: object
+                    properties:
+                      amountInstallationInstallments:
+                        type: integer
+                        default: 1
+                      installationValue:
+                        type: integer
+                        default: 0
+                      amountAdherenceInstallments:
+                        type: integer
+                        default: 1
+                      adherenceValue:
+                        type: integer
+                        default: 0
+                      migratedProvider:
+                        type: integer
+                        default: 0
+                      loyaltyContract:
+                        type: integer
+                        default: 1
+                      receiveInvoice:
+                        type: integer
+                        default: 0
+                  geolocation:
+                        type: object
+                        properties:
+                          lat:
+                            type: string
+                            default: "-23.3064291"
+                          lng:
+                            type: string
+                            default: "-23.3064291"
+                  phone:
+                          type: object
+                          properties:
+                            phoneType:
+                              type: integer
+                              default: 2
+                            phone:
+                              type: string
+                              default: 11940324284
+                  plans:
+                    type: object
+                    properties:
+                      planName:
+                        type: string
+                        default: "plano teste"
+                      additionalPlans:
+                        type: array
+                        items: {
+                          type: integer
+                        }
+                      sellerId:
+                        type: integer
+                        default: 0
+                      promotionId:
+                        type: integer
+                        default: null
+                  contractType:
+                    type: integer
+                    default: 1
+                  originTypeSale:
+                    type: integer
+                    default: 10
+              scheduling:
+                type: object
+                properties:
+                  date:
+                    type: string
+                    default: "2023-04-20 10:00:00"
+                    description: formatado como Y-M-D H:M:S
+                  serviceOrderTypeId:
+                    type: string
+                    default: "33a33091-5a90-47a3-ab8c-7658b54fe44b"
+              installationInfra:
+                type: object
+                properties:
+                  ctoId:
+                    type: string
+                    default: "SV2-362"
+    ResumoVenda200:
+      properties:
+                  protocolNumber:
+                    type: integer
+                    default: 6202302080038
+                  serviceOrderId:
+                    type: string
+                    default: "50d8f7e1-e887-49b9-9dee-cec28bc729bd"
+                  spcDetails:
+                    type: object
+                    properties:
+                      status:
+                        type: number
+                        default: 1
+                      text:
+                        type: string
+                        default:  " Código Operação: 44807860708717998 - Data da Execução: 08/02/2023 07:12:12\r\n"
+                  PersonalData:
+                    type: object
+                    properties:
+                      fullname:
+                        type: string
+                        default: "Thamires Lopes da Silva"
+                      email:
+                        type: string
+                        default: "enfthamires22@gmail.com"
+                      birthDate:
+                        type: string
+                        default: "1995-07-31"
+                      motherName:
+                        type: string
+                        default: ""
+                      mainDocument:
+                        type: string
+                        default: "45132211860"
+                      secondaryDocument:
+                        type: string
+                        default: "421386861"
+                  ContractDetails:
+                    type: object
+                    properties:
+                      ctoId:
+                        type: string
+                        default: "Não encontrado"
+                      Contract:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            default: 12314
+                          planId:
+                            type: integer
+                            default: 231
+                          clientId:
+                            type: integer
+                            default: 1241
+                          installationValue:
+                            type: number
+                            default: 0.9
+                          amountInstallationInstallments:
+                            type: integer
+                            default: 1
+                          receiveInvoice:
+                            type: integer
+                            default: 0
+                          sellerId:
+                            type: integer
+                            default: 1299
+                          type:
+                            type: integer
+                            default: 1
+                          loyaltyContract:
+                            type: integer
+                            default: 123124
+                          promotionId:
+                            type: integer
+                            default: 123124
+                          adherenceValue:
+                            type: number
+                            format: double
+                            default: 0.9
+                          amountAdherenceInstallments:
+                            type: integer
+                            default: 1
+                          migratedProvider:
+                            type: integer
+                            default: 1
+                  GeolocationDetails:
+                    type: object
+                    properties:
+                      lat:
+                        type: string
+                        default: "-23.3064291"
+                      lng:
+                        type: string
+                        default: "-23.3064291"
+                  PhoneDetails:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        phoneType:
+                          type: integer
+                          default: 2
+                        phone:
+                          type: string
+                          default: 11940324284
+                  Addresses:
+                    type: object
+                    properties:
+                      Installation:
+                        type: object
+                        properties:
+                          number:
+                            type: string
+                            default: "199"
+                          complement:
+                            type: string
+                            default: ""
+                          nameStreet:
+                            type: string
+                            default: "Rua QUebec"
+                          cep:
+                            type: integer
+                            default: 786493
+                          nameDistrict:
+                            type: string
+                            default: "Parque Montreal"
+                          description:
+                            type: string
+                            default: "Franco Rocha"
+                          uf:
+                            type: string
+                            default: "SP"
+                  Billing:
+                    type: object
+                    properties:
+                      number:
+                        type: string
+                        default: "199"
+                      complement: 
+                        type: string
+                        default: ""
+                      nameStreet:
+                        type: string
+                        default: "Parque Montreal"
+                      cep:
+                        type: integer
+                        default: 748494
+                      nameDistrict:
+                        type: string
+                        default: "Parque Montereal"
+                      description:
+                        type: string
+                        default: "Franco Rocha"
+                      uf:
+                        type: string
+                        default: "SP"
+                  Plan:
+                    type: string
+                    default: 'T-G-23.300M.4000G'
+                  Category:
+                    type: string
+                    default: "z"
+                  AdditionalPlans:
+                    type: array
+                    items:
+                      type: integer
+                      default: 113132
+    CommitVendaFrontRequest:
+            properties:
+              client:
+                type: object
+                properties:
+                  spc:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        default: 1
+                      text:
+                        type: string
+                        default: ""
+                  personalData:
+                    type: object
+                    properties:
+                      fullname:
+                        type: string
+                        default: "teste"
+                      email:
+                        type: string
+                        default: "teste@gmail.com"
+                      rg:
+                        type: string
+                        default: "121314141"  
+                      document:
+                        type: string
+                        default: "2324234"
+                      birthDate:
+                        type: string
+                        default: "1999-08-11"
+                      motherName:
+                        type: string
+                        default: "teste"
+              contract:
+                type: object
+                properties:
+                  address:
+                    type: object
+                    properties:
+                      billingCity:
+                        type: string
+                        default: "teste"
+                      billingState:
+                        type: string
+                        default: "teste"
+                      billingStreet:
+                        type: string
+                        default: "teste"
+                      billingDistrict:
+                        type: string
+                        default: "Jardim Rio Negro"
+                      billingPostalCode:
+                        type: string
+                        default: "11347445"
+                      billingHouseNumber:
+                        type: integer
+                        default: 13
+                      billingComplement:
+                        type: string
+                        default: ""
+                      installationCity:
+                        type: string
+                        default: ""
+                      installationState:
+                        type: string
+                        default: ""
+                      installationStreet:
+                        type: string
+                        default: ""
+                      installationDistrict:
+                        type: string
+                        default: ""
+                      installationPostalCode:
+                        type: string
+                        default: ""
+                      installationHouseNumber:
+                        type: integer
+                        default: ""
+                      installationComplement:
+                        type: integer
+                        default: ""
+                      country:
+                        type: string
+                        default: "BRASIL"
+                  installationInfo:
+                    type: object
+                    properties:
+                      amountInstallationInstallments:
+                        type: integer
+                        default: 1
+                      installationValue:
+                        type: integer
+                        default: 0
+                      amountAdherenceInstallments:
+                        type: integer
+                        default: 1
+                      adherenceValue:
+                        type: integer
+                        default: 0
+                      migratedProvider:
+                        type: integer
+                        default: 0
+                      loyaltyContract:
+                        type: integer
+                        default: 1
+                      receiveInvoice:
+                        type: integer
+                        default: 0
+                  geolocation:
+                        type: object
+                        properties:
+                          lat:
+                            type: string
+                            default: "-23.3064291"
+                          lng:
+                            type: string
+                            default: "-23.3064291"
+                  phoneNew:
+                          type: object
+                          properties:
+                            phoneType:
+                              type: integer
+                              default: 2
+                            phone:
+                              type: array
+                              items:
+                                type: integer
+                                default: 88988074002
+                  plans:
+                    type: object
+                    properties:
+                      planName:
+                        type: string
+                        default: "plano teste"
+                      additionalPlans:
+                        type: array
+                        items: {
+                          type: integer
+                        }
+                      sellerId:
+                        type: integer
+                        default: 0
+                      promotionId:
+                        type: integer
+                        default: null
+                  contractType:
+                    type: integer
+                    default: 1
+                  originTypeSale:
+                    type: integer
+                    default: 10
+                  observations:
+                    type: string
+              scheduling:
+                type: object
+                properties:
+                  date:
+                    type: string
+                    default: "2023-04-20 10:00:00"
+                    description: deve estar formatado como Y-M-D h:m:s
+                  serviceOrderTypeId:
+                    type: string
+                    default: "33a33091-5a90-47a3-ab8c-7658b54fe44b"
+              installationInfra:
+                type: object
+                properties:
+                  ctoId:
+                    type: string
+                    default: "SV2-362"   
+      

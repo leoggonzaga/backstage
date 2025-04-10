@@ -1,0 +1,69 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Consulta SVA
+servers:
+  - url: http://api-sandbox.desktop.com.br
+    description: HML
+  - url: https://api-v2.desktop.com.br
+    description: PRD
+paths:
+  /api/sva/v1/svas/:
+    get:
+      summary: Consulta os SVAS do cliente.
+      operationId: getSva
+      tags:
+        - consultSVA
+      parameters:
+        - name: adm_id
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+           application/json:
+            schema:
+             $ref: '#/components/schemas/getHttpRequest'
+        '400':
+          description: Bad Request
+  /api/sva/v1/svas/available/:
+    get:
+      summary: Consulta os SVAS que o cliente têm direito.
+      operationId: getAvailableSva
+      tags:
+        - consultSVA
+      parameters:
+        - name: adm_id
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+           application/json:
+            schema:
+             $ref: '#/components/schemas/getHttpRequest'
+        '400':
+          description: Bad Request
+components:
+  schemas:
+    getHttpRequest:
+      type: array
+      items:
+        type: object
+        properties: 
+          sva_id:
+            example: 103632
+            type: integer
+            description: admin_id do cliente
+          partner_name:
+            type: string
+            example: DesktopNews
+            description: nome de parceiro sva
+          description:
+            type: string
+            example: App Desktop News
+            description: descrição do sva

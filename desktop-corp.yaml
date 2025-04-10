@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Location
 metadata:
-  name: desktop-corp
+  name: desktop-corp-location
   description: A collection of all Groups
 spec:
   targets:

@@ -9,60 +9,94 @@ spec:
     displayName: Team Arquitetura
     email: team-arquitetura@desktop.net.br
     picture: https://api.dicebear.com/7.x/identicon/svg?seed=Abby&backgroundType=solid,gradientLinear&backgroundColor=ffd5dc,b6e3f4
-  parent: infrastructure
+  parent: desktop-corp
   children: []
 ---
 apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
-  name: amelia.park
+  name: leonardo.gonzaga
 spec:
   profile:
-    displayName: Amelia Park
-    email: amelia-park@example.com
+    displayName: Leonardo Gonzaga
+    email: leonardo.ggoncalves@desktop.net.br
     picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Gizmo&backgroundColor=transparent
   memberOf: [team-arquitetura]
 ---
 apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
-  name: colette.brock
+  name: bruno.xavier
 spec:
   profile:
-    displayName: Colette Brock
-    email: colette-brock@example.com
+    displayName: Bruno Xavier
+    email: bruno.xavier@desktop.net.br
     picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Bailey&backgroundColor=transparent
   memberOf: [team-arquitetura]
 ---
 apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
-  name: jenny.doe
+  name: weslley.fernandes
 spec:
   profile:
-    displayName: Jenny Doe
-    email: jenny-doe@example.com
+    displayName: Weslley Fernandes
+    email: weslley.fernandes@desktop.net.br
+    picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Bailey&backgroundColor=transparent
+  memberOf: [team-arquitetura]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: ivandilson.duarte
+spec:
+  profile:
+    displayName: Ivandilson Duarte
+    email: ivandilson.duarte@desktop.net.br
     picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Mimi&backgroundColor=transparent
   memberOf: [team-arquitetura]
 ---
 apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
-  name: jonathon.page
+  name: jhemes.caetano
 spec:
   profile:
-    displayName: Jonathon Page
-    email: jonathon-page@example.com
+    displayName: Jhemes Caetano
+    email: jhemes.caetano@desktop.tec.br
     picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Baby&backgroundColor=transparent
   memberOf: [team-arquitetura]
 ---
 apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
-  name: justine.barrow
+  name: lucas.azanha
 spec:
   profile:
-    displayName: Justine Barrow
-    email: justine-barrow@example.com
+    displayName: Lucas Azanaha
+    email: lucas.azanha@desktop.net.br
     picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Sassy&backgroundColor=transparent
   memberOf: [team-arquitetura]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: thiago.morini
+spec:
+  profile:
+    displayName: Thiago Morini
+    email: thiago.morini@desktop.net.br
+    picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Sassy&backgroundColor=transparent
+  memberOf: [team-arquitetura]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: victor.freitas
+spec:
+  profile:
+    displayName: Victor Freitas
+    email: victor.freitas@desktop.net.br
+    picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Sassy&backgroundColor=transparent
+  memberOf: [team-arquitetura]
+  

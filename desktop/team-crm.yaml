@@ -1,0 +1,24 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: team-crm
+  description: Time CRM
+spec:
+  type: team
+  profile:
+    displayName: Team CRM
+    email: team-deskforce@desktop.net.br
+    picture: https://api.dicebear.com/7.x/identicon/svg?seed=Fluffy&backgroundType=solid,gradientLinear&backgroundColor=ffd5dc,b6e3f4
+  parent: infrastructure
+  children: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: user.crm
+spec:
+  profile:
+    displayName: Usuarios CRM
+    email: usuarios.cerm@desktop.net.br
+    picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Luna&backgroundColor=transparent
+  memberOf: [team-crm]

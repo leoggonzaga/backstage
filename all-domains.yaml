@@ -13,6 +13,6 @@ spec:
     - ./domains/customer-domain.yaml
     - ./domains/legado-domain.yaml
     - ./domains/enterprise-domain.yaml
-    - ./domains/teste-domain.yaml
+    
 
     

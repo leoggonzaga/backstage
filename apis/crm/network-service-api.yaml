@@ -1,0 +1,27 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: network-service-api
+  description: Relacionado a equipamentos , serviços de conexoes do cliente, desbloqueio, troca de plano  (desacoplamento da client c#)
+  annotations:
+    sonarqube.org/project-key: pump-station
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/PK/pages/221478973/API+s+FrostBreaker+-+CX
+    title: Confluence
+    icon: code
+  - url: https://bitbucket.org/desktop/desktop-network-service-api/src/main
+    title: Repositório
+    icon: code
+  tags:
+    - porta:8879
+    - matrix
+    - app
+spec:
+  type: openapi
+  lifecycle: production  
+  owner: team-crm
+  system: legacy-crm
+  dependsOn: ['resource:admin-db']
+  definition:
+    $text: ./barramento-service-api-swagger.yaml
+  

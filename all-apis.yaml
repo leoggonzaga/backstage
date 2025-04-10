@@ -5,5 +5,32 @@ metadata:
   description: A collection of all Backstage example APIs
 spec:
   targets:
-    - ./apis/customer-service-barramento-api.yaml
-    - ./apis/field-barramento-api.yaml
+    - ./apis/customer-service-barramento-api.yaml    
+    - ./apis/customer-service-api.yaml
+    - ./apis/authentication-api-backend.yaml
+    - ./apis/catalogo-produtos-api.yaml
+    - ./apis/network-service-api.yaml
+    - ./apis/protocol-api.yaml
+    - ./apis/qvd-api.yaml
+    - ./apis/salesclient-api.yaml
+    - ./apis/salesforcevendas-api.yaml
+    - ./apis/sva-api.yaml
+    - ./apis/validation-api.yaml
+    - ./apis/vendas-api.yaml
+    - ./apis/viabilidade-tecnica-api.yaml
+    - ./apis/client-api.yaml
+    - ./apis/customer-cs-api.yaml
+    - ./apis/bill-order.yaml
+    - ./apis/sendsms-api.yaml
+    - ./apis/pii-financial-api.yaml
+    - ./apis/pii-customer-api.yaml
+    - ./apis/faturamento-api.yaml
+    - ./apis/customer-integration-api.yaml
+    - ./apis/customer-integration-api.yaml
+    - ./apis/customer-cancellation-api.yaml
+    - ./apis/sendmail-massivo-api.yaml
+    - ./apis/payment-api.yaml
+    - ./apis/infra-tv-api.yaml
+    - ./apis/field-internal-gateway.yaml
+    - ./apis/customer-finan.yaml
+    

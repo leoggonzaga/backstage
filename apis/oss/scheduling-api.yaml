@@ -1,0 +1,22 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: scheduling-api
+  description: scheduling-api     
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/OSS2/pages/346128412/APIS+Websvc
+    title: Confluence
+    icon: code
+  - url: https://bitbucket.org/desktop/scheduling/src/main/
+    title: Repositório
+    icon: code
+  tags:    
+    - websvc
+spec:
+  type: openapi
+  lifecycle: production  
+  owner: team-oss
+  system: legacy-oss
+  dependsOn: ['resource:admin-db']
+  definition:
+    $text: ./barramento-service-api-swagger.yaml

@@ -1,0 +1,25 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: customer-service-api
+  description: Nova versao da customer C#. Email, Protocolo, Dados Cadastrais , Boletos , Senhas. Sistemas Atendidos- APP,Chat,Matrix e Salesforce(Direto).
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/SS/pages/137396225/Documenta+o+Barramento+-+Service
+    title: Confluence
+    icon: code
+  - url: https://bitbucket.org/desktop/desktop-customer-service-api/src/main/
+    title: Repositório
+    icon: code
+  tags:
+    - customer
+    - java
+    - customer-service
+    - port:8850    
+spec:
+  type: openapi
+  lifecycle: production  
+  owner: team-crm
+  system: legacy-crm
+  dependsOn: ['resource:admin-db']
+  definition:
+    $text: ./barramento-service-api-swagger.yaml

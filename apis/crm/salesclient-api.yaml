@@ -1,0 +1,22 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: salesclient-api
+  description: Autenticacao do front de vendas e lista informacoes de clientes. Sistemas Atendidos - Front Vendas,SIS  
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/SDF/pages/191332356/SalesClient
+    title: Confluence
+    icon: code
+  - url: https://bitbucket.org/desktop/desktop-salesclient-api/src/main
+    title: Repositório
+    icon: code
+  tags:
+    - porta:48807    
+spec:
+  type: openapi
+  lifecycle: production  
+  owner: team-crm
+  system: legacy-crm
+  dependsOn: ['resource:admin-db']
+  definition:
+    $text: ./swaggers/salesclient-api-swagger.yaml

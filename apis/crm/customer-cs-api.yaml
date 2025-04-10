@@ -1,0 +1,34 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: customer-cs-api
+  description: Interação com app,  cria senha e atualiza senha usuario, realiz a login
+  annotations:
+    sonarqube.org/project-key: pump-station
+  links:  
+  - url: https://bitbucket.org/desktop/customer/src/main/
+    title: Repositório
+    icon: code
+  tags:    
+    - C#    
+spec:
+  type: openapi
+  lifecycle: production  
+  owner: team-crm
+  system: legacy-crm
+  dependsOn: ['resource:admin-db']
+  definition: |
+      openapi: "3.0.0"
+      info:
+        version: 1.0.0
+        title: customer-cs-api
+        description: Documentaçãocustomer-cs-api
+        license:
+          name: © 2021 DESKTOP INTERNET SERVICES | CNPJ 08.170.849/0001-15
+          url: http://www.desktop.com.br        
+      servers:
+        - url: http://api-v2.desktop.com.br/v1
+      paths:
+        /protocol:
+          get:
+            summary: Get teste

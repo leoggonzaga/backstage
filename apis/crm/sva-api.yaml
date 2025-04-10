@@ -1,0 +1,23 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: sva-api
+  description: Realiza ativações, bloqueio e desbloqueio de SVAs. Sistemas Atendidos - SIS, ADM e Parceiros
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/CCPE/pages/132775945/Documenta+o+SVA
+    title: Confluence
+    icon: code
+  - url: https://bitbucket.org/desktop/desktop-sva-api/src/main/
+    title: Repositório
+    icon: codes
+  tags:
+    - porta:8887
+spec:
+  type: openapi
+  lifecycle: production
+  owner: team-crm
+  system: legacy-crm
+  dependsOn: ['resource:admin-db']
+  definition:
+    $text: ./swaggers/sva-api-swagger.yaml
+    

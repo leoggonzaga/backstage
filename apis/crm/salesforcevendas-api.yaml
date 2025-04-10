@@ -1,0 +1,35 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: salesforcevendas-api
+  description: Realiza venda como dupla convivencia(SIS e Salesforce)
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/CCPE/pages/857866241/Documenta+o+Api+Vendas
+    title: Confluence
+    icon: code
+  - url: https://bitbucket.org/desktop/desktop-salesforcevendas-api/src/main/
+    title: Repositório
+    icon: codes
+  tags:
+    - porta:48917
+spec:
+  type: openapi
+  lifecycle: production  
+  owner: team-crm
+  system: legacy-crm
+  dependsOn: ['resource:admin-db']
+  definition: |
+      openapi: "3.0.0"
+      info:
+        version: 1.0.0
+        title: salesforcevendas-api
+        description: Documentação Salesforcevendas API
+        license:
+          name: © 2021 DESKTOP INTERNET SERVICES | CNPJ 08.170.849/0001-15
+          url: http://www.desktop.com.br        
+      servers:
+        - url: http://api-v2.desktop.com.br/v1
+      paths:
+        /teste:
+          get:
+            summary: Get all Sales

@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: apis-oss
+  description: A collection of all Backstage example APIs
+spec:
+  targets:    
+    - ./apis/oss/websvc-api.yaml
+    - ./apis/oss/massive-api.yaml
+    - ./apis/oss/messaging.yaml
+    - ./apis/oss/resource-inventory-api.yaml

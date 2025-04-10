@@ -5,9 +5,7 @@ metadata:
   description: Desktop Internet
   links:
     - url: https://desktop.com.br/
-      title: Website
-    - url: https://meta.wikimedia.org/wiki/
-      title: Intranet
+      title: Website    
 spec:
   type: organization
   profile:
@@ -22,10 +20,9 @@ metadata:
   name: todos-os-groups
   description: A collection of all  Groups
 spec:
-  targets:
-    - ./infrastructure-group.yaml
-    - ./oss-group.yaml    
-    - ./team-deskforce.yaml
+  targets:        
+    - ./team-crm.yaml
     - ./team-arquitetura.yaml
+    - ./team-arquitetura-dados.yaml
     - ./team-oss.yaml
-    - ./team-operacoes.yaml
+    - ./team-devops.yaml

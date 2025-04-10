@@ -1,0 +1,24 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: catalogo-produtos-api
+  description: Lista planos e categorias
+  annotations:
+    sonarqube.org/project-key: pump-station
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/SDF/pages/92241947/Catalogo
+    title: Confluence
+    icon: code
+  - url: https://bitbucket.org/desktop/desktop-backend-catalogo-produtos/src/main/
+    title: Repositório
+    icon: code
+  tags:
+    - porta:8883    
+spec:
+  type: openapi
+  lifecycle: production  
+  owner: team-crm
+  system: legacy-crm
+  dependsOn: ['resource:admin-db']
+  definition:
+    $text: ./swaggers/barramento-service-api-swagger.yaml

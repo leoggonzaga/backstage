@@ -1,0 +1,25 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: customer-service
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/SS/pages/137396225/Documenta+o+Barramento+-+Service
+    title: Documentação
+    icon: code
+  - url: https://bitbucket.org/desktop/desktop-customer-service-api/src/main/
+    title: Repositório
+    icon: code
+  tags:
+    - customer
+    - java
+    - customer-service
+spec:
+  type: openapi
+  lifecycle: production
+  domain: legado
+  owner: team-crm
+  system: customer
+  dependsOn: ['resource:admin-db']
+  definition:
+    $text: ./swaggers/barramento-service-api-swagger.yaml
+

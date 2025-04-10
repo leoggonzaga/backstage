@@ -1,0 +1,162 @@
+openapi: 3.0.3
+servers:
+  - url: https://api-sandbox.desktop.com.br
+    description: HML
+  - url: https://api-v2.desktop.com.br
+    description: PRD
+paths:
+  /api/salesclient/v1/autentication:
+    post:
+      summary: Endpoint para validação de acesso
+      operationId: autentication
+      tags:
+        - autentication
+      parameters:
+        - name: activate
+          in: header
+          description: 'Parâmetros de login para autenticação'
+          required: true
+          schema:
+            $ref: '#/components/schemas/autenticationHttpRequest' 
+      responses:
+        '200':
+          description: 'Resposta da Requisição'
+          content:
+           application/json:
+            schema:
+             $ref: '#/components/schemas/autenticationHttpResponse' 
+  /api/salesclient/v1/gponpositions:
+    get:
+      summary: Endpoint que retorna a localização das gpons mais próximas ao endereço do cliente
+      operationId: gponpositions
+      tags:
+        - gponpositions
+      parameters:
+        - name: activate
+          in: header
+          description: 'Parâmetros para verificação da posição das gpons'
+          required: true
+          schema:
+            $ref: '#/components/schemas/gponHttpRequest' 
+      responses:
+        '200':
+          description: 'Resposta da Requisição'
+          content:
+           application/json:
+            schema:
+             $ref: '#/components/schemas/gponHttpResponse' 
+  /api/salesclient/v1/sellerChannel/{id}:
+    get:
+      summary: Endpoint que retorna o canal de vendas do funcionário
+      operationId: sellerChannel
+      tags:
+        - sellerChannel
+      parameters:
+        - name: id
+          in: path
+          description: 'Id do funcionário'
+          required: true
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: id
+      responses:
+        '200':
+          description: 'Resposta da Requisição'
+          content:
+           application/json:
+            schema:
+             $ref: '#/components/schemas/sellerChannelHttpResponse' 
+  /api/salesclient/v1/seller:
+    get:
+      summary: Endpoint que retorna uma lista de funcionários
+      operationId: seller
+      tags:
+        - seller
+      responses:
+        '200':
+          description: 'Resposta da Requisição'
+          content:
+           application/json:
+            schema:
+             $ref: '#/components/schemas/sellerChannelsHttpResponse' 
+components:
+  schemas:
+    sellerChannelsHttpResponse:
+      type: object
+      properties:
+        sellerList:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 6879
+                description: id do vendedor
+              name:
+                type: string
+                example: '3D SOLUCOES'
+                description: nome do vendedor
+    sellerChannelHttpResponse:
+          type: object
+          properties:
+            userId:
+              type: integer
+              example: 9488
+            channelSales:
+              type: string
+              example:  "Televendas Digital"
+    gponHttpRequest:
+        type: object
+        properties:
+          street:
+            type: string
+            example: 'Rua Napoles'
+          number:
+            type: integer
+            example: 65
+          city:
+            type: string
+            example: 'Varzea Paulista'
+    gponHttpResponse:
+      type: object
+      properties:
+        gponPositions:
+          type: array
+          items:
+            type: object
+            properties:
+              position:
+                type: integer
+                example: 49875
+                description: posição da gpon
+    autenticationHttpRequest:
+      type: object
+      properties:
+        user:
+          type: string
+          example: 'nomedousuario'
+        password:
+          type: string
+          example: 'senhaaqui'
+    autenticationHttpResponse:
+      type: object
+      properties:
+        userId:
+          type: integer
+          example: 4988
+        channelSales:
+          type: string
+          example: ''
+        ctoAvailability:
+          type: boolean
+          example: true
+        isPrepayment:
+          type: boolean
+          example: false
+        tokenAccess:
+          type: string
+          example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsb2dpbjQ5OTgiLCJpc3MiOiJkZXNrdG9wLXNhbGVzY2xpZW50LWF'
+          

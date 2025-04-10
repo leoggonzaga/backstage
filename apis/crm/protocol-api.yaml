@@ -1,0 +1,36 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: protocol-api
+  description: Responsãvel por criação de protocolos. Sistemas atendidos (API de Vendas , SIS) 
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/PK/pages/227049473/Listagem+de+Endpoints
+    title: Confluence
+    icon: code
+  - url: https://bitbucket.org/desktop/desktop-protocol-api/src/main/
+    title: Repositório
+    icon: code
+  tags:
+    - porta:48806
+    - protocolo
+spec:
+  type: openapi
+  lifecycle: production  
+  owner: team-crm
+  system: legacy-crm
+  dependsOn: ['resource:admin-db']
+  definition: |
+      openapi: "3.0.0"
+      info:
+        version: 1.0.0
+        title: protocol-api_backend
+        description: Documentação Protocol API
+        license:
+          name: © 2021 DESKTOP INTERNET SERVICES | CNPJ 08.170.849/0001-15
+          url: http://www.desktop.com.br        
+      servers:
+        - url: http://api-v2.desktop.com.br/v1
+      paths:
+        /protocol:
+          get:
+            summary: Get all Protocols

@@ -1,0 +1,241 @@
+openapi: 3.0.3
+servers:
+  - url: https://api-sandbox.desktop.com.br
+    description: HML
+  - url: https://api-v2.desktop.com.br
+    description: PROD
+
+paths:
+  /api/v1/catalog/categories:
+    get:
+      tags:
+         - Categoria
+      operationId: listByCategoryAndDescription
+      responses:
+        '200':
+          description: 'Resposta da Requisição'
+          content:
+           application/json:
+            schema:
+             $ref: '#/components/schemas/categoriesHttpResponse'
+        '404':
+          description: Not Found
+        '401':
+          description: invalid token
+  /api/v1/catalog/offers:
+    get:
+      tags:
+        - Ofertas
+      operationId: findOffers
+      parameters:
+        - name: city
+          example: Sumare
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: category
+          example: Z        
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: migrated_provider
+          example: true        
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: loyalty_contract
+          example: true  
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: minDownloadSpeed
+          example: 0
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: maxDownloadSpeed
+          example: 900000
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: 'Resposta da Requisição'
+          content:
+           application/json:
+            schema:
+             $ref: '#/components/schemas/offersHttpResponse' 
+components:
+  schemas:
+    categoriesHttpResponse:
+          type: array
+          items:
+            type: object
+            properties:
+              category:
+                type: string
+                example: "D"
+                description: categoria do plano
+              description:
+                type: string
+                example: 'Fibra Home'
+                description: descrição do plano
+              commercial_description:
+                type: string
+                example: "INTERNET"
+                description: descrição dos serviços do plano
+              telephony:
+                type: string
+                example: "N"
+                description: tipo de telefonia
+    offersHttpResponse:
+      type: object
+      properties:
+        plans:
+          type: array
+          items:
+            type: object
+            properties:
+              planName:
+                type: string
+                example: "T-G-22.600M.4000G.Max"
+                description: nome do plano
+              planCommercialName:
+                type: string
+                example: "Combo 600 Mega + TV Max - 2022"
+                description: nome comercial do plano
+              description:
+                type: string
+                example: "Fibra Combo TV Max 600M 2022"
+                description: descrição do plano
+              commercialDescription:
+                type: string
+                example: null
+                description: descrição comercial do plano (pode ser nulo)
+              price:
+                type: number
+                example: 299.90
+                description: preço do plano
+              upload:
+                type: integer 
+                example: 300000
+                description: taxa de upload do plano
+              download:
+                type: integer
+                example: 600000
+                description: taxa de download do plano
+              limit:
+                type: integer
+                example: 4000
+                description: limite do plano  
+              mesh:
+                type: boolean
+                example: false
+                description: Se o plano possui adicional mesh
+              promotions:
+                type: array
+                description: 'conjunto de promoções (pode ser vazio)'
+                items:
+                  type: object
+                  properties:
+                    description:
+                      type: string
+                      example: 'Oferta Padrão 300Mb 2022 (R$ 79,90 03 Meses)'
+                      description: descricao da promoção
+                    commercialDescription:
+                      type: string
+                      example: null
+                      description: descrição comercial do plano (pode ser nulo)
+                    monthsOfValidity:
+                      type: string
+                      example: "3"
+                      description: meses de duração da promoção
+                    promotionalValue:
+                      type: number
+                      example: 79.99
+                    value:
+                      type: number
+                      example: 20.00
+                    id:
+                      type: integer
+                      example: 94
+              additionalPlans:
+                type: array
+                description: 'conjunto de planos adicionais (pode ser vazio)'
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                      description: id do plano adicional
+                    summary:
+                      type: string
+                      example: Ponto TV
+                      description: descrição do plano
+                    value:
+                      type: number
+                      example: 20.50
+                      description: valor do plano adicional
+              videoApps:
+                type: array
+                description: 'conjunto de aplicativos de vídeo (pode ser vazio)'
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                      description: id do plano adicional
+                    summary:
+                      type: string
+                      example: Ponto TV
+                      description: descrição do plano
+                    value:
+                      type: number
+                      example: 20.50
+                      description: valor do plano adicional
+                              
+        installation_info:
+          type: object
+          description: "informações de instalação"
+          properties:
+            value:
+              type: number
+              example: 19.90
+              description: valor de instalação
+            maxInstallment:
+              type: integer
+              example: 1
+              description: quantidade de instalações
+            inCash:
+              type: number
+              example: 12.20
+              description: quantidade em dinheiro
+        adherence_info:
+          type: object
+          description: "informações de adesão"
+          properties:
+            value:
+              type: number
+              example: 19.90
+              description: valor de instalação
+            maxInstallment:
+              type: integer
+              example: 1
+              description: quantidade de instalações
+            inCash:
+              type: number
+              example: 12.20
+              description: quantidade em dinheiro
+            
+                  
+              

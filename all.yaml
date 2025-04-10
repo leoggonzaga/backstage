@@ -5,8 +5,13 @@ metadata:
   description: A collection of all Backstage example entities, except users, groups, and templates
 spec:
   targets:            
-    - all-apis.yaml
     - all-systems.yaml
     - all-resources.yaml
-    - all-domains.yaml    
-    
+    - all-domains.yaml
+    - all-domains.yaml
+    - ./apis/salesforce/field-barramento-api.yaml
+    - ./apis/salesforce/field-internal-gateway.yaml
+    - ./apis/oss/websvc-api.yaml
+    - ./apis/oss/massive-api.yaml
+    - ./apis/oss/messaging.yaml
+    - ./apis/oss/resource-inventory-api.yaml

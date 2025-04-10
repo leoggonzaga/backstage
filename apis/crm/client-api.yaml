@@ -1,0 +1,23 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: client-api
+  description: API responsável pela persistência dos dados de cliente no banco de dados. Também possui algumas integrações com parceiros para ativar SVAs. Essa API NÃO é mantida somente pela Squad DeskForce.
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/SDF/pages/34897921/Client
+    title: Confluence
+    icon: code
+  - url: https://bitbucket.org/desktop/client/src/main/
+    title: Repositório
+    icon: codes
+  tags:
+    - c#
+spec:
+  type: openapi
+  lifecycle: production
+  owner: team-crm
+  system: legacy-crm
+  dependsOn: ['resource:admin-db']
+  definition:
+    $text: ./swaggers/client-api-swagger.yaml
+    

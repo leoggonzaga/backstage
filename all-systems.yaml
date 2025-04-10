@@ -4,7 +4,7 @@ metadata:
   name: desktop-systems
   description: A collection of all systems
 spec:
-  targets:        
+  targets:
     - ./systems/customer-bill.yaml
     - ./systems/customer-collection.yaml
     - ./systems/customer-experience.yaml
@@ -48,3 +48,8 @@ spec:
     - ./systems/service-problem.yaml
     - ./systems/service-test.yaml
     - ./systems/service-usage.yaml
+    - ./systems/lagacy-crm.yaml
+    - ./systems/lagacy-oss.yaml
+    - ./systems/lagacy-salesforce.yaml
+    - ./systems/lagacy-payment.yaml
+    

@@ -1,0 +1,26 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: customer-integration-api
+  description: customer-integration-api
+  annotations:
+    sonarqube.org/project-key: pump-station
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/CCPE/pages/668532775/Authentication
+    title: Confluence
+    icon: code
+  - url: https://bitbucket.org/desktop/desktop-authentication-api/src/main/
+    title: Repositório
+    icon: code
+  tags:
+    - porta:8880
+    - authentication
+    - apps
+spec:
+  type: openapi
+  lifecycle: production  
+  owner: team-payment
+  system: legacy-payment
+  dependsOn: ['resource:admin-db']
+  definition:
+    $text: ./barramento-service-api-swagger.yaml

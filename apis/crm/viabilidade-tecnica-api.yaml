@@ -1,0 +1,35 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: viabilidade-tecnica-api
+  description: A API de Viabilidade Técnica oferece funcionalidades para verificar a disponibilidade técnica de planos em uma determinado endereço. Esta API é utilizada principalmente para realizar consultas que determinam se um plano, pode ser fornecido em um endereço solicitado.  
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/CCPE/pages/730660867/Viabilidade+T+cnica
+    title: Confluence
+    icon: code
+  - url: https://bitbucket.org/desktop/desktop-backend-viabilidade-tecnica/src/main/
+    title: Repositório
+    icon: code
+  tags:
+    - porta:8882    
+spec:
+  type: openapi
+  lifecycle: production  
+  owner: team-crm
+  system: legacy-crm
+  dependsOn: ['resource:admin-db']
+  definition: |
+      openapi: "3.0.0"
+      info:
+        version: 1.0.0
+        title: viabilidade-tecnica-api
+        description: Documentação viabilidade-tecnica-api
+        license:
+          name: © 2021 DESKTOP INTERNET SERVICES | CNPJ 08.170.849/0001-15
+          url: http://www.desktop.com.br        
+      servers:
+        - url: http://api-v2.desktop.com.br/v1
+      paths:
+        /technicalViability:
+          post:
+            summary: Retorna a verificação dos serviços da Desktop nos parâmetros e endereços de entrada na API.

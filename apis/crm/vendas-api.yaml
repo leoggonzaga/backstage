@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: vendas-api
+  description: API responsável pela persistência dos dados de venda no banco de dados, tanto do E-commerce quanto do Front de Vendas. Sistemas atendidos -  SIS, Front de Vendas , E-Com, Chatbot e Parceiros
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/SDF/pages/107282433/Vendas
+    title: Confluence
+    icon: code  
+  tags:
+    - porta:8881
+spec:
+  type: openapi
+  lifecycle: production  
+  owner: team-crm
+  system: legacy-crm
+  dependsOn: ['resource:admin-db']
+  definition:
+    $text: ./swaggers/vendas-api-swagger.yaml

@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: legacy-crm
+  description: Grupo para centralizar sistemas legados do time crm  
+spec:
+  domain: legado
+  owner: team-crm
+  

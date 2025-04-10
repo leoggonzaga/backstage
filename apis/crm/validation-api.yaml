@@ -1,0 +1,22 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: validation-api
+  description: Validação de Email comunicando com o paceiro Bouncer(Validador de email)
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/SDF/pages/127565825/Validation
+    title: Confluence
+    icon: code
+  - url: https://bitbucket.org/desktop/desktop-validation-api/src/main/
+    title: Repositório
+    icon: codes
+  tags:
+    - porta:8856    
+spec:
+  type: openapi
+  lifecycle: production  
+  owner: team-crm
+  system: legacy-crm
+  dependsOn: ['resource:admin-db']
+  definition:
+    $text: ./swaggers/validation-api-swagger.yaml

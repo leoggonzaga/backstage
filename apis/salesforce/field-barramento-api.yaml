@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: barramento-field-api
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/SS/pages/163741731/Documenta+o+Barramento+-+Field
+    title: Confluence
+    icon: code
+spec:
+  type: openapi
+  lifecycle: producao
+  owner: team-salesforce
+  system: interaction
+  definition:
+    $text: ./field-barramento-swagger.yaml

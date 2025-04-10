@@ -1,0 +1,26 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: authentication-api-backend
+  description: Interação com app,  cria senha e atualiza senha usuario, realiz a login
+  annotations:
+    sonarqube.org/project-key: pump-station
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/CCPE/pages/668532775/Authentication
+    title: Confluence
+    icon: code
+  - url: https://bitbucket.org/desktop/desktop-authentication-api/src/main/
+    title: Repositório
+    icon: code
+  tags:
+    - porta:8880
+    - authentication
+    - app
+spec:
+  type: openapi
+  lifecycle: production  
+  owner: team-crm
+  system: legacy-crm
+  dependsOn: ['resource:admin-db']
+  definition:
+    $text: ./swaggers/barramento-service-api-swagger.yaml

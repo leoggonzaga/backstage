@@ -1,0 +1,37 @@
+openapi: 3.0.3
+servers:
+  - url: https://api-sandbox.desktop.com.br
+    description: HML
+  - url: https://api-v2.desktop.com.br
+    description: PROD
+paths:
+  /validation/v1/validate:
+    get:
+      tags:
+         - Email Validation
+      operationId: validate-prefix
+      summary: Valida o prefixo do email
+      parameters:
+         - in: query
+           name: email
+           description: "Email do cliente"
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/validationResponse'
+          description: OK
+        '404':
+          description: Not Found
+        '401':
+          description: invalid request
+
+components:
+  schemas:
+    validationResponse:
+            properties:
+              valid:
+                type: string
+              message:
+                type: string

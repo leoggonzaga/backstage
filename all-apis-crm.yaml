@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: apis-crm
+  description: A collection of all Backstage example APIs
+spec:
+  targets:    
+    - ./apis/crm/customer-service-api.yaml
+    - ./apis/crm/authentication-api-backend.yaml
+    - ./apis/crm/catalogo-produtos-api.yaml
+    - ./apis/crm/network-service-api.yaml
+    - ./apis/crm/protocol-api.yaml
+    - ./apis/crm/qvd-api.yaml
+    - ./apis/crm/salesclient-api.yaml
+    - ./apis/crm/salesforcevendas-api.yaml
+    - ./apis/crm/sva-api.yaml
+    - ./apis/crm/validation-api.yaml
+    - ./apis/crm/vendas-api.yaml
+    - ./apis/crm/viabilidade-tecnica-api.yaml
+    - ./apis/crm/client-api.yaml
+    

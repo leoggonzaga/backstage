@@ -1,0 +1,20 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: messaging-api
+  description: messaging-api ainda existe?   
+  links:
+  - url: https://desktop.atlassian.net/wiki/spaces/OSS2/pages/346128412/APIS+Websvc
+    title: Confluence
+    icon: code
+  - url: https://bitbucket.org/desktop/websvc/src/main/
+    title: Repositório
+    icon: code
+  tags:    
+    - websvc
+spec:
+  type: openapi
+  lifecycle: production  
+  owner: team-oss
+  system: legacy-oss
+  dependsOn: ['resource:admin-db']  
